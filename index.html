@@ -1,586 +1,528 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClawCon '26 - Bangalore | March 08, 2026</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --lobster-red: #E63946;
-            --lobster-orange: #FF6B35;
-            --deep-sea: #1D3557;
-            --ocean-blue: #457B9D;
-            --seafoam: #A8DADC;
-            --shell-cream: #F1FAEE;
-            --black: #0D1117;
-            --dark-gray: #161B22;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--black);
-            color: var(--shell-cream);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 80px 24px;
-            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 50%, var(--deep-sea) 100%);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(230, 57, 70, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 107, 53, 0.1) 0%, transparent 40%);
-            pointer-events: none;
-        }
-
-        .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 32px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 7rem);
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 .claw {
-            background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero h1 .con {
-            color: var(--shell-cream);
-        }
-
-        .hero h1 .year {
-            display: block;
-            font-size: 0.4em;
-            color: var(--seafoam);
-            margin-top: 8px;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            color: var(--seafoam);
-            max-width: 700px;
-            margin-bottom: 48px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 32px;
-            justify-content: center;
-            margin-bottom: 48px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-meta-item {
-            text-align: center;
-        }
-
-        .hero-meta-item .label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--ocean-blue);
-            margin-bottom: 4px;
-        }
-
-        .hero-meta-item .value {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--shell-cream);
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
-            color: white;
-            padding: 18px 48px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 60px;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(230, 57, 70, 0.3);
-        }
-
-        /* About Section */
-        .about {
-            padding: 120px 24px;
-            background: var(--dark-gray);
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .section-title .highlight {
-            color: var(--lobster-orange);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--seafoam);
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-
-        .stat-card {
-            background: var(--black);
-            padding: 32px;
-            border-radius: 16px;
-            text-align: center;
-            border: 1px solid rgba(168, 218, 220, 0.1);
-        }
-
-        .stat-card .number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-card .label {
-            color: var(--seafoam);
-            font-size: 0.9rem;
-            margin-top: 8px;
-        }
-
-        /* Schedule Section */
-        .schedule {
-            padding: 120px 24px;
-            background: var(--black);
-        }
-
-        .schedule-grid {
-            margin-top: 64px;
-        }
-
-        .schedule-item {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 32px;
-            padding: 32px 0;
-            border-bottom: 1px solid rgba(168, 218, 220, 0.1);
-            align-items: start;
-        }
-
-        @media (max-width: 600px) {
-            .schedule-item {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-        }
-
-        .schedule-time {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--lobster-orange);
-        }
-
-        .schedule-content h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--shell-cream);
-        }
-
-        .schedule-content p {
-            color: var(--seafoam);
-            font-size: 0.95rem;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 120px 24px;
-            background: linear-gradient(180deg, var(--dark-gray) 0%, var(--deep-sea) 100%);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-            margin-top: 64px;
-        }
-
-        .feature-card {
-            background: rgba(13, 17, 23, 0.8);
-            padding: 40px 32px;
-            border-radius: 20px;
-            border: 1px solid rgba(168, 218, 220, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--lobster-orange);
-        }
-
-        .feature-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--shell-cream);
-        }
-
-        .feature-card p {
-            color: var(--seafoam);
-            font-size: 0.95rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 120px 24px;
-            background: var(--black);
-            text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            color: var(--seafoam);
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Footer */
-        footer {
-            padding: 48px 24px;
-            background: var(--dark-gray);
-            text-align: center;
-            border-top: 1px solid rgba(168, 218, 220, 0.1);
-        }
-
-        footer p {
-            color: var(--ocean-blue);
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: var(--lobster-orange);
-            text-decoration: none;
-        }
-
-        /* Animated claw decoration */
-        .claw-decoration {
-            position: absolute;
-            font-size: 200px;
-            opacity: 0.03;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        .claw-decoration.left {
-            left: -50px;
-            top: 20%;
-            transform: rotate(-30deg);
-        }
-
-        .claw-decoration.right {
-            right: -50px;
-            bottom: 20%;
-            transform: rotate(30deg);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClawCon '26 — Bangalore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react-router-dom@6.22.3/dist/umd/react-router-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <span class="claw-decoration left">🦞</span>
-        <span class="claw-decoration right">🦞</span>
-        
-        <span class="badge">Inner Circle Presents</span>
-        
-        <h1>
-            <span class="claw">Claw</span><span class="con">Con</span>
-            <span class="year">Bangalore · March 08, 2026</span>
-        </h1>
-        
-        <p class="hero-subtitle">
-            Where the people building the agent economy meet the agents they've built. 
-            One curated evening. Keynotes, live agent competitions, and conversations 
-            that don't happen at regular conferences.
-        </p>
-        
-        <div class="hero-meta">
-            <div class="hero-meta-item">
-                <div class="label">Date</div>
-                <div class="value">March 08, 2026</div>
-            </div>
-            <div class="hero-meta-item">
-                <div class="label">Location</div>
-                <div class="value">Bangalore, India</div>
-            </div>
-            <div class="hero-meta-item">
-                <div class="label">Duration</div>
-                <div class="value">5 Hours</div>
-            </div>
-            <div class="hero-meta-item">
-                <div class="label">Capacity</div>
-                <div class="value">100 Builders</div>
-            </div>
-        </div>
-        
-        <a href="#apply" class="cta-button">Apply to Attend</a>
-    </section>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect, useRef } = React;
+    const { BrowserRouter, HashRouter: Router, Routes, Route } = ReactRouterDOM;
 
-    <!-- About Section -->
-    <section class="about">
-        <div class="container">
-            <div class="about-content">
-                <div>
-                    <h2 class="section-title">Hosted by <span class="highlight">Inner Circle</span></h2>
-                    <div class="about-text">
-                        <p>
-                            Home to 10k+ cumulative cracked builders. We believe your circle 
-                            is your edge to building great products, raising capital, and 
-                            finding the right audience.
-                        </p>
-                        <p>
-                            We've been at the intersection of AI and onchain for over a year, 
-                            running programs, shipping tools, and building the community that 
-                            ClawCon is for.
-                        </p>
-                        <p>
-                            We recently launched Clawd Kitchen — 30+ agents went live and a 
-                            prize pool of 6000 USD was rewarded to the best agents.
-                        </p>
-                        <p><strong>Now, it's time to unlock the complete potential with ClawCon, IRL.</strong></p>
-                    </div>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="number">10k+</div>
-                        <div class="label">Community Builders</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="number">30+</div>
-                        <div class="label">Agents Shipped</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="number">$6k</div>
-                        <div class="label">Prize Pool</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="number">100</div>
-                        <div class="label">Curated Seats</div>
-                    </div>
-                </div>
+    const customStyles = {
+      body: {
+        fontFamily: "'Inter', sans-serif",
+        backgroundColor: '#faf7f2',
+        color: '#1c1917',
+        overflowX: 'hidden',
+      },
+      heroCanvasContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+        overflow: 'hidden',
+      },
+      editorialFont: {
+        fontFamily: "'Instrument Serif', serif",
+      },
+    };
+
+    const ThreeCanvas = () => {
+      const containerRef = useRef(null);
+      useEffect(() => {
+        const loadAndInit = () => {
+          if (!window.THREE) {
+            setTimeout(loadAndInit, 200);
+            return;
+          }
+          const THREE = window.THREE;
+          const container = containerRef.current;
+          if (!container) return;
+          const scene = new THREE.Scene();
+          scene.background = new THREE.Color(0xfaf7f2);
+          scene.fog = new THREE.Fog(0xfaf7f2, 10, 50);
+          const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
+          const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          renderer.shadowMap.enabled = true;
+          renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+          container.appendChild(renderer.domElement);
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+          scene.add(ambientLight);
+          const dirLight = new THREE.DirectionalLight(0xffaa88, 1.2);
+          dirLight.position.set(5, 10, 7);
+          dirLight.castShadow = true;
+          dirLight.shadow.mapSize.width = 1024;
+          dirLight.shadow.mapSize.height = 1024;
+          dirLight.shadow.bias = -0.001;
+          scene.add(dirLight);
+          const rimLight = new THREE.DirectionalLight(0x88ccff, 0.4);
+          rimLight.position.set(-5, 5, -5);
+          scene.add(rimLight);
+          const fillLight = new THREE.PointLight(0xffaa00, 0.3);
+          fillLight.position.set(-5, 0, 5);
+          scene.add(fillLight);
+          const lobsterGroup = new THREE.Group();
+          const shellMaterial = new THREE.MeshPhysicalMaterial({ color: 0xff6b6b, roughness: 0.2, metalness: 0.1, clearcoat: 0.3, clearcoatRoughness: 0.2 });
+          const darkMaterial = new THREE.MeshStandardMaterial({ color: 0x8b0000, roughness: 0.5 });
+          const bodyGeo = new THREE.CylinderGeometry(0.8, 1.2, 3.5, 32);
+          const body = new THREE.Mesh(bodyGeo, shellMaterial);
+          body.rotation.x = Math.PI / 2;
+          body.castShadow = true;
+          body.receiveShadow = true;
+          lobsterGroup.add(body);
+          const headGeo = new THREE.ConeGeometry(0.8, 2, 32);
+          const head = new THREE.Mesh(headGeo, shellMaterial);
+          head.rotation.x = -Math.PI / 2;
+          head.position.z = 2.75;
+          head.castShadow = true;
+          head.receiveShadow = true;
+          lobsterGroup.add(head);
+          const tailGroup = new THREE.Group();
+          tailGroup.position.z = -2;
+          for (let i = 0; i < 5; i++) {
+            const sWidth = 1.1 - i * 0.15;
+            const segGeo = new THREE.CylinderGeometry(sWidth, sWidth, 0.8, 32, 1, false, 0, Math.PI * 2);
+            const seg = new THREE.Mesh(segGeo, shellMaterial);
+            seg.rotation.x = Math.PI / 2;
+            seg.position.z = -(i * 0.6);
+            seg.position.y = -(i * 0.15);
+            seg.rotation.x = Math.PI / 2 + i * 0.1;
+            seg.castShadow = true;
+            seg.receiveShadow = true;
+            tailGroup.add(seg);
+          }
+          const fanGeo = new THREE.CylinderGeometry(0.8, 0.1, 1, 6);
+          const fan = new THREE.Mesh(fanGeo, shellMaterial);
+          fan.scale.z = 0.2;
+          fan.position.z = -3.2;
+          fan.position.y = -0.8;
+          fan.rotation.x = Math.PI / 1.5;
+          fan.castShadow = true;
+          tailGroup.add(fan);
+          lobsterGroup.add(tailGroup);
+          function createClaw(isRight, sizeScale) {
+            const armGroup = new THREE.Group();
+            const side = isRight ? 1 : -1;
+            const shoulderGeo = new THREE.SphereGeometry(0.6 * sizeScale, 16, 16);
+            const shoulder = new THREE.Mesh(shoulderGeo, shellMaterial);
+            shoulder.position.set(side * 1.2, 0, 1.5);
+            armGroup.add(shoulder);
+            const armGeo = new THREE.CylinderGeometry(0.3 * sizeScale, 0.4 * sizeScale, 2, 16);
+            const arm = new THREE.Mesh(armGeo, shellMaterial);
+            arm.position.set(side * 2, 0, 2.5);
+            arm.rotation.z = -side * 0.5;
+            arm.rotation.x = 1.2;
+            arm.castShadow = true;
+            armGroup.add(arm);
+            const handCylGeo = new THREE.CylinderGeometry(0.8 * sizeScale, 0.6 * sizeScale, 2.5 * sizeScale, 16);
+            const hand = new THREE.Mesh(handCylGeo, shellMaterial);
+            hand.scale.x = 1.5;
+            hand.position.set(side * 2.8, 0, 4.2);
+            hand.rotation.x = 1.5;
+            hand.rotation.z = -side * 0.2;
+            hand.castShadow = true;
+            armGroup.add(hand);
+            const pincerGeo = new THREE.ConeGeometry(0.3 * sizeScale, 1.5 * sizeScale, 16);
+            const pincer1 = new THREE.Mesh(pincerGeo, darkMaterial);
+            pincer1.position.set(side * 2.5, 0, 5.5);
+            pincer1.rotation.x = 1.5;
+            pincer1.rotation.z = side * 0.3;
+            armGroup.add(pincer1);
+            const pincer2 = new THREE.Mesh(pincerGeo, darkMaterial);
+            pincer2.position.set(side * 3.1, 0, 5.5);
+            pincer2.rotation.x = 1.5;
+            pincer2.rotation.z = -side * 0.3;
+            armGroup.add(pincer2);
+            return armGroup;
+          }
+          const leftClaw = createClaw(false, 1.2);
+          const rightClaw = createClaw(true, 0.9);
+          lobsterGroup.add(leftClaw);
+          lobsterGroup.add(rightClaw);
+          for (let i = 0; i < 4; i++) {
+            const legGeo = new THREE.CylinderGeometry(0.1, 0.1, 3, 8);
+            const legR = new THREE.Mesh(legGeo, shellMaterial);
+            legR.position.set(1.5, -0.5, 1 - i * 0.8);
+            legR.rotation.z = 1;
+            legR.rotation.x = 0.5;
+            lobsterGroup.add(legR);
+            const legL = new THREE.Mesh(legGeo, shellMaterial);
+            legL.position.set(-1.5, -0.5, 1 - i * 0.8);
+            legL.rotation.z = -1;
+            legL.rotation.x = 0.5;
+            lobsterGroup.add(legL);
+          }
+          const eyeGeo = new THREE.SphereGeometry(0.15, 16, 16);
+          const eyeMat = new THREE.MeshStandardMaterial({ color: 0x000000, roughness: 0 });
+          const eyeL = new THREE.Mesh(eyeGeo, eyeMat);
+          eyeL.position.set(-0.4, 0.8, 3.2);
+          lobsterGroup.add(eyeL);
+          const eyeR = new THREE.Mesh(eyeGeo, eyeMat);
+          eyeR.position.set(0.4, 0.8, 3.2);
+          lobsterGroup.add(eyeR);
+          const antGeo = new THREE.CylinderGeometry(0.02, 0.05, 8, 8);
+          const antL = new THREE.Mesh(antGeo, shellMaterial);
+          antL.position.set(-0.5, 1, 5);
+          antL.rotation.x = 1.2;
+          antL.rotation.z = -0.3;
+          lobsterGroup.add(antL);
+          const antR = new THREE.Mesh(antGeo, shellMaterial);
+          antR.position.set(0.5, 1, 5);
+          antR.rotation.x = 1.2;
+          antR.rotation.z = 0.3;
+          lobsterGroup.add(antR);
+          lobsterGroup.rotation.x = -Math.PI / 6;
+          lobsterGroup.rotation.y = -Math.PI / 4;
+          lobsterGroup.position.y = 0;
+          scene.add(lobsterGroup);
+          camera.position.z = 14;
+          camera.position.y = 2;
+          let time = 0;
+          let animFrameId;
+          const animate = () => {
+            animFrameId = requestAnimationFrame(animate);
+            time += 0.005;
+            lobsterGroup.rotation.y = Math.sin(time) * 0.2 + time * 0.2;
+            lobsterGroup.position.y = Math.sin(time * 2) * 0.2;
+            antL.rotation.z = -0.3 + Math.sin(time * 3) * 0.05;
+            antR.rotation.z = 0.3 + Math.cos(time * 3) * 0.05;
+            renderer.render(scene, camera);
+          };
+          animate();
+          const handleResize = () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+          };
+          const handleMouseMove = (e) => {
+            const x = (e.clientX / window.innerWidth) * 2 - 1;
+            const y = -(e.clientY / window.innerHeight) * 2 + 1;
+            lobsterGroup.rotation.z = x * 0.05;
+            camera.position.x = x * 0.5;
+            camera.position.y = 2 + y * 0.5;
+            camera.lookAt(0, 0, 0);
+          };
+          window.addEventListener('resize', handleResize);
+          document.addEventListener('mousemove', handleMouseMove);
+          return () => {
+            cancelAnimationFrame(animFrameId);
+            window.removeEventListener('resize', handleResize);
+            document.removeEventListener('mousemove', handleMouseMove);
+            if (container && renderer.domElement && container.contains(renderer.domElement)) {
+              container.removeChild(renderer.domElement);
+            }
+            renderer.dispose();
+          };
+        };
+        const cleanup = loadAndInit();
+        return () => { if (typeof cleanup === 'function') cleanup(); };
+      }, []);
+      return <div ref={containerRef} style={customStyles.heroCanvasContainer} />;
+    };
+
+    const Nav = () => {
+      const scrollTo = (id) => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      };
+      return (
+        <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 mix-blend-difference text-white pointer-events-none">
+          <div className="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div className="text-xl font-medium tracking-tight pointer-events-auto mix-blend-difference">CC '26</div>
+            <div className="hidden md:flex gap-8 text-sm font-medium pointer-events-auto mix-blend-difference">
+              <button onClick={() => scrollTo('about')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">About</button>
+              <button onClick={() => scrollTo('schedule')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Schedule</button>
+              <button onClick={() => scrollTo('features')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Features</button>
+              <button onClick={() => scrollTo('apply')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Apply</button>
             </div>
-        </div>
-    </section>
+          </div>
+        </nav>
+      );
+    };
 
-    <!-- Schedule Section -->
-    <section class="schedule">
-        <div class="container">
-            <h2 class="section-title">Program <span class="highlight">Schedule</span></h2>
-            
-            <div class="schedule-grid">
-                <div class="schedule-item">
-                    <div class="schedule-time">4:00 PM</div>
-                    <div class="schedule-content">
-                        <h3>Doors + Networking</h3>
-                        <p>Arrive, meet the room. Agent creation station live from the start.</p>
-                    </div>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="schedule-time">4:30 PM</div>
-                    <div class="schedule-content">
-                        <h3>Opening Keynote</h3>
-                        <p>We start the event with a banger opener by a major player.</p>
-                    </div>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="schedule-time">5:00 PM</div>
-                    <div class="schedule-content">
-                        <h3>Fireside Chat I — AI × Crypto</h3>
-                        <p>Where agent infrastructure and onchain primitives collide.</p>
-                    </div>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="schedule-time">5:45 PM</div>
-                    <div class="schedule-content">
-                        <h3>Fireside Chat II — The VC View</h3>
-                        <p>What serious investors are betting on in the agent economy.</p>
-                    </div>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="schedule-time">6:45 PM</div>
-                    <div class="schedule-content">
-                        <h3>Round Table Chat</h3>
-                        <p>Deep dive discussion with builders and industry leaders.</p>
-                    </div>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="schedule-time">7:30 PM</div>
-                    <div class="schedule-content">
-                        <h3>🔥 Live Agent Trading Battle</h3>
-                        <p>Agents compete on Polymarket in real time. Visible leaderboard. Real stakes.</p>
-                    </div>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="schedule-time">8:00 PM</div>
-                    <div class="schedule-content">
-                        <h3>Builder Mixer</h3>
-                        <p>Open floor. No agenda. The real conversations happen here.</p>
-                    </div>
-                </div>
+    const HeroSection = () => {
+      const scrollTo = (id) => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      };
+      return (
+        <section className="relative h-screen w-full flex flex-col justify-end pb-12 md:pb-24 overflow-hidden">
+          <ThreeCanvas />
+          <div className="relative z-10 w-full px-6 max-w-[1400px] mx-auto pointer-events-none">
+            <div className="mb-6 pointer-events-auto">
+              <span className="inline-flex items-center px-3 py-1 rounded-full border border-stone-800/20 bg-stone-100/50 backdrop-blur-sm text-xs font-semibold uppercase tracking-wider text-stone-800">
+                Inner Circle Presents
+              </span>
             </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title">What Makes <span class="highlight">ClawCon</span> Different</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">🎯</div>
-                    <h3>Invite-Only + Curated</h3>
-                    <p>100 hand-picked builders. No randoms. Everyone in the room is shipping or investing.</p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+              <div className="lg:col-span-8">
+                <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4 mix-blend-multiply" style={customStyles.editorialFont}>
+                  ClawCon '26
+                </h1>
+                <p className="text-xl md:text-3xl italic text-stone-600 mb-8" style={customStyles.editorialFont}>
+                  Bangalore · March 08, 2026
+                </p>
+              </div>
+              <div className="lg:col-span-4 pb-4">
+                <p className="text-lg md:text-xl leading-relaxed text-stone-800 max-w-md mb-8 backdrop-blur-sm">
+                  Where the people building the agent economy meet the agents they've built. One curated evening. Keynotes, live agent competitions, and conversations that don't happen at regular conferences.
+                </p>
+                <div className="flex flex-wrap gap-3 mb-8 pointer-events-auto">
+                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">March 08</span>
+                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">Bangalore</span>
+                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">5 Hours</span>
+                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">100 Builders</span>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="icon">🤖</div>
-                    <h3>Live Agent Creation</h3>
-                    <p>Agent creation station running from the start. Build while you network.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="icon">⚔️</div>
-                    <h3>Real Stakes Competition</h3>
-                    <p>Watch agents battle it out on Polymarket with real money. Live leaderboard.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="icon">💡</div>
-                    <h3>AI × Crypto Focus</h3>
-                    <p>Where agent infrastructure meets onchain primitives. The future is here.</p>
-                </div>
+                <button
+                  onClick={() => scrollTo('apply')}
+                  className="pointer-events-auto inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-full text-lg font-medium transition-colors duration-300 shadow-lg shadow-orange-900/10 group"
+                >
+                  Apply to Attend
+                  <svg className="w-5 h-5 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </button>
+              </div>
             </div>
-        </div>
-    </section>
+          </div>
+          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#faf7f2] to-transparent z-0 pointer-events-none"></div>
+        </section>
+      );
+    };
 
-    <!-- CTA Section -->
-    <section class="cta-section" id="apply">
-        <div class="container">
-            <h2>Ready to <span style="color: var(--lobster-orange)">Join</span>?</h2>
-            <p>Apply now for your spot at ClawCon Bangalore. Limited to 100 curated builders.</p>
-            <a href="#" class="cta-button">Apply to Attend</a>
-        </div>
-    </section>
+    const StatCard = ({ value, label }) => (
+      <div className="bg-white p-8 md:p-10 flex flex-col items-center text-center hover:bg-stone-50 transition-colors">
+        <span className="text-4xl md:text-5xl font-bold text-stone-900 mb-2">{value}</span>
+        <span className="text-sm text-stone-500 font-medium uppercase tracking-wide">{label}</span>
+      </div>
+    );
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>ClawCon '26 — Presented by <a href="#">Inner Circle</a></p>
-            <p style="margin-top: 12px;">March 08, 2026 · Bangalore, India</p>
+    const AboutSection = () => (
+      <section id="about" className="py-24 md:py-32 px-6 bg-[#faf7f2] relative z-20">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-7">
+            <span className="block text-orange-600 font-medium tracking-wide mb-6 uppercase text-sm">Hosted by Inner Circle</span>
+            <h2 className="text-5xl md:text-6xl mb-12 text-stone-900 leading-tight" style={customStyles.editorialFont}>
+              The future is autonomous.<br />
+              <span className="text-stone-400 italic">Are you ready to build it?</span>
+            </h2>
+            <div className="space-y-6 text-lg text-stone-700 leading-relaxed max-w-2xl">
+              <p>We are entering a new era of software development where agents don't just assist—they execute. ClawCon is the first gathering dedicated entirely to the builders, researchers, and visionaries shaping the autonomous agent economy.</p>
+              <p>This isn't a massive trade show with thousands of silent attendees. It is an intimate gathering of the 100 most influential minds in the space. We believe that the most valuable API is the one between humans.</p>
+              <p>Expect deep technical dives into LLM orchestration, multi-agent frameworks, and the ethics of autonomous systems. We're moving beyond "Hello World" demos into production-ready architectures that are changing how business is done.</p>
+              <p>The evening concludes with the "Claw Back" hackathon showcase, where pre-selected teams demonstrate agents built in the preceding 48 hours, competing for the Golden Claw trophy and significant grant funding.</p>
+            </div>
+          </div>
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <div className="grid grid-cols-2 gap-px bg-stone-200 border border-stone-200 rounded-2xl overflow-hidden">
+              <StatCard value="10k+" label="Community Builders" />
+              <StatCard value="30+" label="Agents Shipped" />
+              <StatCard value="$50k" label="Prize Pool" />
+              <StatCard value="100" label="Curated Seats" />
+            </div>
+          </div>
         </div>
-    </footer>
+      </section>
+    );
+
+    const ScheduleItem = ({ time, title, description }) => (
+      <div className="group py-8 border-b border-stone-300 grid grid-cols-1 md:grid-cols-12 gap-4 items-start hover:bg-stone-200/50 transition-colors px-4 -mx-4 rounded-lg">
+        <div className="md:col-span-3 font-mono text-stone-500 pt-1">{time}</div>
+        <div className="md:col-span-9">
+          <h3 className="text-2xl font-medium text-stone-900 mb-2">{title}</h3>
+          <p className="text-stone-600">{description}</p>
+        </div>
+      </div>
+    );
+
+    const ScheduleSection = () => {
+      const items = [
+        { time: '16:00 — 16:30', title: 'Doors Open & Registration', description: 'Check-in, grab your badge, and enjoy welcome refreshments while networking with early arrivals.' },
+        { time: '16:30 — 17:15', title: 'Opening Keynote: The Agentic Future', description: 'Sarah Chen, VP of AI at Inner Circle, discusses the shift from chat-based interfaces to autonomous action.' },
+        { time: '17:15 — 18:00', title: 'Panel: Swarms & Multi-Agent Systems', description: 'A deep dive into orchestration frameworks. Featuring engineers from OpenAI, Anthropic, and AutoGPT contributors.' },
+        { time: '18:00 — 18:30', title: 'Coffee & Networking Break', description: 'Fuel up and find your co-founder.' },
+        { time: '18:30 — 19:30', title: 'Showcase: Live Agent Battles', description: '3 finalists demo their autonomous agents solving real-world tasks live on stage. The audience votes for the winner.' },
+        { time: '19:30 — 20:30', title: 'Fireside Chat: Ethics & Safety', description: 'Unscripted conversation about the risks of autonomous code execution and how to build guardrails.' },
+        { time: '20:30 — Late', title: 'Cocktails & Closing Mixer', description: 'Music, food, and open bar on the terrace.' },
+      ];
+      return (
+        <section id="schedule" className="py-24 px-6 bg-stone-100 border-t border-stone-200">
+          <div className="max-w-[1000px] mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <div>
+                <span className="block text-orange-600 font-medium tracking-wide mb-2 uppercase text-sm">Program Schedule</span>
+                <h2 className="text-5xl md:text-6xl text-stone-900" style={customStyles.editorialFont}>The Evening</h2>
+              </div>
+              <div className="text-stone-500">March 08, 2026 · IST Timezone</div>
+            </div>
+            <div className="border-t border-stone-300">
+              {items.map((item, i) => (
+                <ScheduleItem key={i} time={item.time} title={item.title} description={item.description} />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    const FeatureCard = ({ icon, title, description }) => (
+      <div className="bg-white p-10 rounded-2xl border border-stone-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-6 text-orange-600">
+          {icon}
+        </div>
+        <h3 className="text-2xl mb-3 text-stone-900" style={customStyles.editorialFont}>{title}</h3>
+        <p className="text-stone-600 leading-relaxed">{description}</p>
+      </div>
+    );
+
+    const FeaturesSection = () => {
+      const features = [
+        {
+          title: 'Curated Attendance',
+          description: "We manually review every application. You'll be in a room with CTOs, lead maintainers of major open source projects, and founders.",
+          icon: (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>),
+        },
+        {
+          title: 'Live Deployments',
+          description: 'Talk is cheap. Presenters are required to show live code or deployments. No pre-recorded videos allowed.',
+          icon: (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>),
+        },
+        {
+          title: 'Zero-BS Networking',
+          description: 'Structured networking sessions designed to help you find collaborators, not just exchange business cards.',
+          icon: (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>),
+        },
+        {
+          title: 'Grant Funding',
+          description: "We're giving away $50k in grants on the spot to the most promising projects demoed during the conference.",
+          icon: (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>),
+        },
+      ];
+      return (
+        <section id="features" className="py-24 px-6 bg-[#faf7f2]">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="max-w-2xl mb-16">
+              <h2 className="text-5xl md:text-6xl text-stone-900 mb-6" style={customStyles.editorialFont}>What Makes ClawCon Different</h2>
+              <p className="text-xl text-stone-600">We stripped away the fluff. No vendor booths, no sales pitches. Just pure engineering and vision.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {features.map((f, i) => (
+                <FeatureCard key={i} icon={f.icon} title={f.title} description={f.description} />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    const ApplySection = () => {
+      const [clicked, setClicked] = useState(false);
+      const handleApply = () => {
+        setClicked(true);
+        setTimeout(() => setClicked(false), 2000);
+      };
+      return (
+        <section id="apply" className="py-32 px-6 bg-stone-900 text-[#faf7f2] relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/cubes.png')" }} />
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <h2 className="text-6xl md:text-8xl mb-8" style={customStyles.editorialFont}>Ready to Join?</h2>
+            <p className="text-xl md:text-2xl text-stone-400 mb-12 font-light">
+              Spaces are extremely limited. Applications are reviewed on a rolling basis.
+            </p>
+            <button
+              onClick={handleApply}
+              className="bg-orange-600 hover:bg-orange-500 text-white px-12 py-6 rounded-full text-xl font-medium transition-all duration-300 hover:scale-105"
+              style={{ boxShadow: '0 0 40px -10px rgba(234,88,12,0.5)' }}
+            >
+              {clicked ? 'Application Submitted! ✓' : 'Apply to Attend ↗'}
+            </button>
+            <p className="mt-8 text-sm text-stone-500 uppercase tracking-widest">Early bird applications close Feb 10</p>
+          </div>
+        </section>
+      );
+    };
+
+    const Footer = () => (
+      <footer className="bg-[#faf7f2] border-t border-stone-200 py-12 px-6">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-stone-900 font-bold text-2xl tracking-tighter">ClawCon '26</div>
+          <div className="text-stone-500 text-sm md:text-base flex flex-col md:flex-row items-center gap-2 md:gap-6">
+            <span>Presented by Inner Circle</span>
+            <span className="hidden md:inline">·</span>
+            <span>March 08, 2026</span>
+            <span className="hidden md:inline">·</span>
+            <span>Bangalore, India</span>
+          </div>
+          <div className="flex gap-6">
+            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">Twitter</a>
+            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">LinkedIn</a>
+            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">Email</a>
+          </div>
+        </div>
+      </footer>
+    );
+
+    const HomePage = () => (
+      <div style={customStyles.body}>
+        <Nav />
+        <HeroSection />
+        <AboutSection />
+        <ScheduleSection />
+        <FeaturesSection />
+        <ApplySection />
+        <Footer />
+      </div>
+    );
+
+    const App = () => {
+      useEffect(() => {
+        const style = document.createElement('style');
+        style.textContent = `
+          @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+          body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf7f2;
+            color: #1c1917;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+          }
+          ::selection { background-color: #fed7aa; color: #7c2d12; }
+          ::-webkit-scrollbar { width: 8px; }
+          ::-webkit-scrollbar-track { background: #faf7f2; }
+          ::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 4px; }
+          ::-webkit-scrollbar-thumb:hover { background: #d6d3d1; }
+        `;
+        document.head.appendChild(style);
+        const threeScript = document.createElement('script');
+        threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+        threeScript.async = true;
+        document.head.appendChild(threeScript);
+        return () => { document.head.removeChild(style); };
+      }, []);
+      return (
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </Router>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>
