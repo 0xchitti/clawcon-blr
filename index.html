@@ -4,923 +4,519 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ClawCon '26 — Bangalore</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --red: #E63946;
-      --orange: #FF6B35;
-      --bg: #080A0E;
-      --surface: #0E1117;
-      --surface2: #141820;
-      --border: rgba(255,255,255,0.07);
-      --border-bright: rgba(230,57,70,0.3);
-      --text: #F1F5F9;
-      --muted: #8898AA;
-      --accent: #A8DADC;
-      --serif: 'DM Serif Display', Georgia, serif;
-      --sans: 'Space Grotesk', sans-serif;
-    }
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 64px;
-      background: rgba(8, 10, 14, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      letter-spacing: -0.02em;
-    }
-    .nav-logo span { color: var(--red); }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a {
-      font-size: 0.875rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta {
-      background: linear-gradient(135deg, var(--red), var(--orange)) !important;
-      color: white !important;
-      padding: 10px 24px;
-      border-radius: 100px;
-      font-weight: 600;
-      font-size: 0.85rem !important;
-      transition: opacity 0.2s, transform 0.2s !important;
-    }
-    .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
-    @media (max-width: 640px) {
-      nav { padding: 0 20px; }
-      .nav-links { gap: 16px; }
-      .nav-links a:not(.nav-cta) { display: none; }
-    }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-      overflow: hidden;
-    }
-
-    /* animated gradient orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.35;
-      pointer-events: none;
-      animation: drift 12s ease-in-out infinite alternate;
-    }
-    .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, #E63946 0%, transparent 70%); top: -150px; left: -100px; animation-delay: 0s; }
-    .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, #FF6B35 0%, transparent 70%); bottom: -100px; right: -80px; animation-delay: -4s; }
-    .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, #1D3557 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -8s; }
-    @keyframes drift {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 30px) scale(1.05); }
-    }
-    .orb-3 { animation: drift2 15s ease-in-out infinite alternate; }
-    @keyframes drift2 {
-      0% { transform: translate(-50%, -50%) scale(1); }
-      100% { transform: translate(calc(-50% + 30px), calc(-50% + 20px)) scale(1.1); }
-    }
-
-    /* noise overlay */
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      position: relative;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--border-bright);
-      border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 32px;
-      background: rgba(230,57,70,0.08);
-    }
-    .hero-eyebrow::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--orange);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-
-    .hero-title {
-      position: relative;
-      z-index: 2;
-      font-family: var(--serif);
-      font-size: clamp(4.5rem, 13vw, 9rem);
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 28px;
-    }
-    .hero-title .gradient-text {
-      background: linear-gradient(135deg, var(--red) 0%, var(--orange) 60%, #FFD166 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-title .ghost { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.2); }
-
-    .hero-location {
-      position: relative;
-      z-index: 2;
-      font-size: clamp(0.9rem, 2vw, 1.15rem);
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .hero-desc {
-      position: relative;
-      z-index: 2;
-      font-size: clamp(1rem, 2.2vw, 1.2rem);
-      color: var(--muted);
-      max-width: 580px;
-      margin: 0 auto 48px;
-      line-height: 1.7;
-    }
-
-    /* countdown */
-    .countdown {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-    }
-    .countdown-unit {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .countdown-num {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      line-height: 1;
-      background: linear-gradient(135deg, var(--red), var(--orange));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      min-width: 70px;
-      text-align: center;
-    }
-    .countdown-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-    .countdown-sep {
-      font-family: var(--serif);
-      font-size: 2.5rem;
-      color: var(--border-bright);
-      align-self: flex-start;
-      margin-top: 4px;
-    }
-
-    .hero-actions {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--red), var(--orange));
-      color: white;
-      padding: 16px 44px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 100px;
-      transition: all 0.3s;
-      box-shadow: 0 0 0 0 rgba(230,57,70,0.4);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(230,57,70,0.35);
-    }
-    .btn-ghost {
-      display: inline-block;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 16px 44px;
-      font-size: 1rem;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 100px;
-      transition: all 0.3s;
-    }
-    .btn-ghost:hover {
-      border-color: var(--border-bright);
-      background: rgba(230,57,70,0.06);
-    }
-
-    /* ── TICKER ── */
-    .ticker-wrap {
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      padding: 14px 0;
-    }
-    .ticker-track {
-      display: flex;
-      gap: 0;
-      animation: ticker 30s linear infinite;
-      white-space: nowrap;
-    }
-    .ticker-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 0 40px;
-    }
-    .ticker-item .dot {
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--orange);
-      flex-shrink: 0;
-    }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* ── ABOUT ── */
-    .section {
-      padding: 100px 24px;
-    }
-    .container { max-width: 1180px; margin: 0 auto; }
-
-    .section-label {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 16px;
-    }
-    .section-heading {
-      font-family: var(--serif);
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
-
-    .about-body {
-      font-size: 1.05rem;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-    .about-body p { margin-bottom: 18px; }
-    .about-body strong { color: var(--text); }
-
-    .stats-stack { display: flex; flex-direction: column; gap: 1px; }
-    .stat-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 28px 32px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      transition: border-color 0.3s;
-    }
-    .stat-row:first-child { border-radius: 16px 16px 0 0; }
-    .stat-row:last-child { border-radius: 0 0 16px 16px; }
-    .stat-row:hover { border-color: var(--border-bright); }
-    .stat-row .num {
-      font-family: var(--serif);
-      font-size: 2.5rem;
-      background: linear-gradient(135deg, var(--red), var(--orange));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .stat-row .desc { font-size: 0.9rem; color: var(--muted); text-align: right; max-width: 180px; }
-
-    /* ── SCHEDULE ── */
-    .schedule-bg { background: var(--surface); }
-    .timeline { margin-top: 56px; display: flex; flex-direction: column; gap: 0; }
-    .tl-item {
-      display: grid;
-      grid-template-columns: 100px 1px 1fr;
-      gap: 0 32px;
-      position: relative;
-    }
-    .tl-time {
-      padding: 28px 0;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--orange);
-      text-align: right;
-      line-height: 1.2;
-    }
-    .tl-line {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .tl-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--red);
-      margin-top: 32px;
-      flex-shrink: 0;
-      box-shadow: 0 0 12px rgba(230,57,70,0.6);
-    }
-    .tl-connector {
-      flex: 1;
-      width: 1px;
-      background: var(--border);
-      margin: 4px 0;
-    }
-    .tl-content {
-      padding: 24px 0 24px 0;
-    }
-    .tl-content h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-    .tl-content p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-    .tl-badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 100px;
-      margin-bottom: 8px;
-    }
-    .tl-badge.fire { background: rgba(230,57,70,0.15); color: var(--red); border: 1px solid rgba(230,57,70,0.25); }
-    .tl-badge.net { background: rgba(168,218,220,0.1); color: var(--accent); border: 1px solid rgba(168,218,220,0.2); }
-    .tl-badge.key { background: rgba(255,107,53,0.12); color: var(--orange); border: 1px solid rgba(255,107,53,0.25); }
-
-    @media (max-width: 600px) {
-      .tl-item { grid-template-columns: 72px 1px 1fr; gap: 0 16px; }
-      .tl-time { font-size: 0.78rem; }
-    }
-
-    /* ── WHY SECTION ── */
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      margin-top: 56px;
-    }
-    @media (max-width: 640px) { .why-grid { grid-template-columns: 1fr; } }
-    .why-card {
-      background: var(--surface);
-      padding: 44px 36px;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .why-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--red), var(--orange));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s;
-    }
-    .why-card:hover::before { transform: scaleX(1); }
-    .why-card:hover { background: var(--surface2); }
-    .why-card:first-child { border-radius: 16px 0 0 0; }
-    .why-card:nth-child(2) { border-radius: 0 16px 0 0; }
-    .why-card:nth-child(3) { border-radius: 0 0 0 16px; }
-    .why-card:last-child { border-radius: 0 0 16px 0; }
-    @media (max-width: 640px) {
-      .why-card:first-child { border-radius: 16px 16px 0 0; }
-      .why-card:nth-child(2) { border-radius: 0; }
-      .why-card:nth-child(3) { border-radius: 0; }
-      .why-card:last-child { border-radius: 0 0 16px 16px; }
-    }
-    .why-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      background: rgba(230,57,70,0.1);
-      border: 1px solid rgba(230,57,70,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-    }
-    .why-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
-    .why-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
-
-    /* ── BATTLE SECTION ── */
-    .battle-section {
-      background: linear-gradient(135deg, #1a0507 0%, #0D0810 50%, #0a0f1e 100%);
-      border-top: 1px solid rgba(230,57,70,0.2);
-      border-bottom: 1px solid rgba(230,57,70,0.2);
-    }
-    .battle-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-    @media (max-width: 768px) { .battle-inner { grid-template-columns: 1fr; gap: 40px; } }
-    .battle-heading {
-      font-family: var(--serif);
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      line-height: 1;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-    }
-    .battle-heading em { color: var(--red); font-style: italic; }
-    .battle-body { font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
-    .battle-viz {
-      background: var(--surface);
-      border: 1px solid rgba(230,57,70,0.2);
-      border-radius: 20px;
-      padding: 32px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.8rem;
-    }
-    .battle-viz .header {
-      color: var(--muted);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 12px;
-      margin-bottom: 16px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .battle-viz .header span:last-child { color: var(--red); }
-    .leaderboard-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .leaderboard-row:last-child { border-bottom: none; }
-    .lb-rank { color: var(--orange); width: 20px; text-align: center; font-weight: bold; }
-    .lb-name { color: var(--text); flex: 1; }
-    .lb-gain { color: #4ade80; font-weight: bold; }
-    .lb-loss { color: var(--red); font-weight: bold; }
-    .lb-bar {
-      height: 4px;
-      border-radius: 2px;
-      background: linear-gradient(90deg, var(--red), var(--orange));
-    }
-
-    /* ── CTA ── */
-    .cta-section {
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-section .cta-bg {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, rgba(230,57,70,0.12) 0%, transparent 70%);
-    }
-    .cta-section .cta-content { position: relative; z-index: 2; }
-    .cta-section h2 {
-      font-family: var(--serif);
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      letter-spacing: -0.03em;
-      margin-bottom: 20px;
-      line-height: 1.05;
-    }
-    .cta-section p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 500px;
-      margin: 0 auto 40px;
-    }
-    .cta-note {
-      margin-top: 20px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      opacity: 0.7;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 48px 24px;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-    }
-    .footer-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-    }
-    .footer-brand span { color: var(--red); }
-    .footer-meta { font-size: 0.8rem; color: var(--muted); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--orange); }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect, useRef } = React;
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo"><span>Claw</span>Con '26</div>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#schedule">Schedule</a>
-    <a href="#battle">Battle</a>
-    <a href="#apply" class="nav-cta">Apply Now</a>
-  </div>
-</nav>
+    const customStyles = {
+      body: {
+        fontFamily: "'Inter', sans-serif",
+        backgroundColor: '#faf7f2',
+        color: '#1c1917',
+        overflowX: 'hidden',
+      },
+      heroCanvasContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+        overflow: 'hidden',
+      },
+      editorialFont: {
+        fontFamily: "'Instrument Serif', serif",
+      },
+    };
 
-<!-- HERO -->
-<section class="hero">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+    const ThreeCanvas = () => {
+      const containerRef = useRef(null);
+      useEffect(() => {
+        const loadAndInit = () => {
+          if (!window.THREE) {
+            setTimeout(loadAndInit, 200);
+            return;
+          }
+          const THREE = window.THREE;
+          const container = containerRef.current;
+          if (!container) return;
+          const scene = new THREE.Scene();
+          scene.background = new THREE.Color(0xfaf7f2);
+          scene.fog = new THREE.Fog(0xfaf7f2, 10, 50);
+          const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
+          const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          renderer.shadowMap.enabled = true;
+          renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+          container.appendChild(renderer.domElement);
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+          scene.add(ambientLight);
+          const dirLight = new THREE.DirectionalLight(0xffaa88, 1.2);
+          dirLight.position.set(5, 10, 7);
+          dirLight.castShadow = true;
+          dirLight.shadow.mapSize.width = 1024;
+          dirLight.shadow.mapSize.height = 1024;
+          dirLight.shadow.bias = -0.001;
+          scene.add(dirLight);
+          const rimLight = new THREE.DirectionalLight(0x88ccff, 0.4);
+          rimLight.position.set(-5, 5, -5);
+          scene.add(rimLight);
+          const fillLight = new THREE.PointLight(0xffaa00, 0.3);
+          fillLight.position.set(-5, 0, 5);
+          scene.add(fillLight);
+          const lobsterGroup = new THREE.Group();
+          const shellMaterial = new THREE.MeshPhysicalMaterial({ color: 0xff6b6b, roughness: 0.2, metalness: 0.1, clearcoat: 0.3, clearcoatRoughness: 0.2 });
+          const darkMaterial = new THREE.MeshStandardMaterial({ color: 0x8b0000, roughness: 0.5 });
+          const bodyGeo = new THREE.CylinderGeometry(0.8, 1.2, 3.5, 32);
+          const body = new THREE.Mesh(bodyGeo, shellMaterial);
+          body.rotation.x = Math.PI / 2;
+          body.castShadow = true;
+          body.receiveShadow = true;
+          lobsterGroup.add(body);
+          const headGeo = new THREE.ConeGeometry(0.8, 2, 32);
+          const head = new THREE.Mesh(headGeo, shellMaterial);
+          head.rotation.x = -Math.PI / 2;
+          head.position.z = 2.75;
+          head.castShadow = true;
+          head.receiveShadow = true;
+          lobsterGroup.add(head);
+          const tailGroup = new THREE.Group();
+          tailGroup.position.z = -2;
+          for (let i = 0; i < 5; i++) {
+            const sWidth = 1.1 - i * 0.15;
+            const segGeo = new THREE.CylinderGeometry(sWidth, sWidth, 0.8, 32, 1, false, 0, Math.PI * 2);
+            const seg = new THREE.Mesh(segGeo, shellMaterial);
+            seg.rotation.x = Math.PI / 2;
+            seg.position.z = -(i * 0.6);
+            seg.position.y = -(i * 0.15);
+            seg.rotation.x = Math.PI / 2 + i * 0.1;
+            seg.castShadow = true;
+            seg.receiveShadow = true;
+            tailGroup.add(seg);
+          }
+          const fanGeo = new THREE.CylinderGeometry(0.8, 0.1, 1, 6);
+          const fan = new THREE.Mesh(fanGeo, shellMaterial);
+          fan.scale.z = 0.2;
+          fan.position.z = -3.2;
+          fan.position.y = -0.8;
+          fan.rotation.x = Math.PI / 1.5;
+          fan.castShadow = true;
+          tailGroup.add(fan);
+          lobsterGroup.add(tailGroup);
+          function createClaw(isRight, sizeScale) {
+            const armGroup = new THREE.Group();
+            const side = isRight ? 1 : -1;
+            const shoulderGeo = new THREE.SphereGeometry(0.6 * sizeScale, 16, 16);
+            const shoulder = new THREE.Mesh(shoulderGeo, shellMaterial);
+            shoulder.position.set(side * 1.2, 0, 1.5);
+            armGroup.add(shoulder);
+            const armGeo = new THREE.CylinderGeometry(0.3 * sizeScale, 0.4 * sizeScale, 2, 16);
+            const arm = new THREE.Mesh(armGeo, shellMaterial);
+            arm.position.set(side * 2, 0, 2.5);
+            arm.rotation.z = -side * 0.5;
+            arm.rotation.x = 1.2;
+            arm.castShadow = true;
+            armGroup.add(arm);
+            const handCylGeo = new THREE.CylinderGeometry(0.8 * sizeScale, 0.6 * sizeScale, 2.5 * sizeScale, 16);
+            const hand = new THREE.Mesh(handCylGeo, shellMaterial);
+            hand.scale.x = 1.5;
+            hand.position.set(side * 2.8, 0, 4.2);
+            hand.rotation.x = 1.5;
+            hand.rotation.z = -side * 0.2;
+            hand.castShadow = true;
+            armGroup.add(hand);
+            const pincerGeo = new THREE.ConeGeometry(0.3 * sizeScale, 1.5 * sizeScale, 16);
+            const pincer1 = new THREE.Mesh(pincerGeo, darkMaterial);
+            pincer1.position.set(side * 2.5, 0, 5.5);
+            pincer1.rotation.x = 1.5;
+            pincer1.rotation.z = side * 0.3;
+            armGroup.add(pincer1);
+            const pincer2 = new THREE.Mesh(pincerGeo, darkMaterial);
+            pincer2.position.set(side * 3.1, 0, 5.5);
+            pincer2.rotation.x = 1.5;
+            pincer2.rotation.z = -side * 0.3;
+            armGroup.add(pincer2);
+            return armGroup;
+          }
+          const leftClaw = createClaw(false, 1.2);
+          const rightClaw = createClaw(true, 0.9);
+          lobsterGroup.add(leftClaw);
+          lobsterGroup.add(rightClaw);
+          for (let i = 0; i < 4; i++) {
+            const legGeo = new THREE.CylinderGeometry(0.1, 0.1, 3, 8);
+            const legR = new THREE.Mesh(legGeo, shellMaterial);
+            legR.position.set(1.5, -0.5, 1 - i * 0.8);
+            legR.rotation.z = 1;
+            legR.rotation.x = 0.5;
+            lobsterGroup.add(legR);
+            const legL = new THREE.Mesh(legGeo, shellMaterial);
+            legL.position.set(-1.5, -0.5, 1 - i * 0.8);
+            legL.rotation.z = -1;
+            legL.rotation.x = 0.5;
+            lobsterGroup.add(legL);
+          }
+          const eyeGeo = new THREE.SphereGeometry(0.15, 16, 16);
+          const eyeMat = new THREE.MeshStandardMaterial({ color: 0x000000, roughness: 0 });
+          const eyeL = new THREE.Mesh(eyeGeo, eyeMat);
+          eyeL.position.set(-0.4, 0.8, 3.2);
+          lobsterGroup.add(eyeL);
+          const eyeR = new THREE.Mesh(eyeGeo, eyeMat);
+          eyeR.position.set(0.4, 0.8, 3.2);
+          lobsterGroup.add(eyeR);
+          const antGeo = new THREE.CylinderGeometry(0.02, 0.05, 8, 8);
+          const antL = new THREE.Mesh(antGeo, shellMaterial);
+          antL.position.set(-0.5, 1, 5);
+          antL.rotation.x = 1.2;
+          antL.rotation.z = -0.3;
+          lobsterGroup.add(antL);
+          const antR = new THREE.Mesh(antGeo, shellMaterial);
+          antR.position.set(0.5, 1, 5);
+          antR.rotation.x = 1.2;
+          antR.rotation.z = 0.3;
+          lobsterGroup.add(antR);
+          lobsterGroup.rotation.x = -Math.PI / 6;
+          lobsterGroup.rotation.y = -Math.PI / 4;
+          lobsterGroup.position.y = 0;
+          scene.add(lobsterGroup);
+          camera.position.z = 14;
+          camera.position.y = 2;
+          let time = 0;
+          let animFrameId;
+          const animate = () => {
+            animFrameId = requestAnimationFrame(animate);
+            time += 0.005;
+            lobsterGroup.rotation.y = Math.sin(time) * 0.2 + time * 0.2;
+            lobsterGroup.position.y = Math.sin(time * 2) * 0.2;
+            antL.rotation.z = -0.3 + Math.sin(time * 3) * 0.05;
+            antR.rotation.z = 0.3 + Math.cos(time * 3) * 0.05;
+            renderer.render(scene, camera);
+          };
+          animate();
+          const handleResize = () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+          };
+          const handleMouseMove = (e) => {
+            const x = (e.clientX / window.innerWidth) * 2 - 1;
+            const y = -(e.clientY / window.innerHeight) * 2 + 1;
+            lobsterGroup.rotation.z = x * 0.05;
+            camera.position.x = x * 0.5;
+            camera.position.y = 2 + y * 0.5;
+            camera.lookAt(0, 0, 0);
+          };
+          window.addEventListener('resize', handleResize);
+          document.addEventListener('mousemove', handleMouseMove);
+          return () => {
+            cancelAnimationFrame(animFrameId);
+            window.removeEventListener('resize', handleResize);
+            document.removeEventListener('mousemove', handleMouseMove);
+            if (container && renderer.domElement && container.contains(renderer.domElement)) {
+              container.removeChild(renderer.domElement);
+            }
+            renderer.dispose();
+          };
+        };
+        const cleanup = loadAndInit();
+        return () => { if (typeof cleanup === 'function') cleanup(); };
+      }, []);
+      return <div ref={containerRef} style={customStyles.heroCanvasContainer} />;
+    };
 
-  <div class="hero-eyebrow">Inner Circle Presents</div>
+    const Nav = () => {
+      const scrollTo = (id) => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      };
+      return (
+        <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 mix-blend-difference text-white pointer-events-none">
+          <div className="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div className="text-xl font-medium tracking-tight pointer-events-auto mix-blend-difference">CC '26</div>
+            <div className="hidden md:flex gap-8 text-sm font-medium pointer-events-auto mix-blend-difference">
+              <button onClick={() => scrollTo('about')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">About</button>
+              <button onClick={() => scrollTo('schedule')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Schedule</button>
+              <button onClick={() => scrollTo('features')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Features</button>
+              <button onClick={() => scrollTo('apply')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Apply</button>
+            </div>
+          </div>
+        </nav>
+      );
+    };
 
-  <h1 class="hero-title">
-    <span class="gradient-text">Claw</span><span>Con</span><br />
-    <span class="ghost">'26</span>
-  </h1>
+    const HeroSection = () => {
+      const scrollTo = (id) => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      };
+      return (
+        <section className="relative h-screen w-full flex flex-col justify-end pb-12 md:pb-24 overflow-hidden">
+          <ThreeCanvas />
+          <div className="relative z-10 w-full px-6 max-w-[1400px] mx-auto pointer-events-none">
+            <div className="mb-6 pointer-events-auto">
+              <span className="inline-flex items-center px-3 py-1 rounded-full border border-stone-800/20 bg-stone-100/50 backdrop-blur-sm text-xs font-semibold uppercase tracking-wider text-stone-800">
+                Inner Circle Presents
+              </span>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+              <div className="lg:col-span-8">
+                <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4 mix-blend-multiply" style={customStyles.editorialFont}>
+                  ClawCon '26
+                </h1>
+                <p className="text-xl md:text-3xl italic text-stone-600 mb-8" style={customStyles.editorialFont}>
+                  Bangalore · March 08, 2026
+                </p>
+              </div>
+              <div className="lg:col-span-4 pb-4">
+                <p className="text-lg md:text-xl leading-relaxed text-stone-800 max-w-md mb-8 backdrop-blur-sm">
+                  Where the people building the agent economy meet the agents they've built. One curated evening. Keynotes, live agent competitions, and conversations that don't happen at regular conferences.
+                </p>
+                <div className="flex flex-wrap gap-3 mb-8 pointer-events-auto">
+                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">March 08</span>
+                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">Bangalore</span>
+                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">5 Hours</span>
+                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">100 Builders</span>
+                </div>
+                <button
+                  onClick={() => scrollTo('apply')}
+                  className="pointer-events-auto inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-full text-lg font-medium transition-colors duration-300 shadow-lg shadow-orange-900/10 group"
+                >
+                  Apply to Attend
+                  <svg className="w-5 h-5 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#faf7f2] to-transparent z-0 pointer-events-none"></div>
+        </section>
+      );
+    };
 
-  <div class="hero-location">Bangalore, India &nbsp;·&nbsp; March 08, 2026</div>
+    const StatCard = ({ value, label }) => (
+      <div className="bg-white p-8 md:p-10 flex flex-col items-center text-center hover:bg-stone-50 transition-colors">
+        <span className="text-4xl md:text-5xl font-bold text-stone-900 mb-2">{value}</span>
+        <span className="text-sm text-stone-500 font-medium uppercase tracking-wide">{label}</span>
+      </div>
+    );
 
-  <p class="hero-desc">
-    Where the people building the agent economy meet the agents they've built.
-    100 curated builders. One night. Real stakes.
-  </p>
+    const AboutSection = () => (
+      <section id="about" className="py-24 md:py-32 px-6 bg-[#faf7f2] relative z-20">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-7">
+            <span className="block text-orange-600 font-medium tracking-wide mb-6 uppercase text-sm">Hosted by Inner Circle</span>
+            <h2 className="text-5xl md:text-6xl mb-12 text-stone-900 leading-tight" style={customStyles.editorialFont}>
+              Built by builders.<br />
+              <span className="text-stone-400 italic">For the agent economy.</span>
+            </h2>
+            <div className="space-y-6 text-lg text-stone-700 leading-relaxed max-w-2xl">
+              <p>Home to <strong className="text-stone-900">10k+ cumulative cracked builders</strong>. We believe your circle is your edge to building great products, raising capital, and finding the right audience.</p>
+              <p>We've been at the intersection of AI and onchain for over a year — running programs, shipping tools, and building the community that ClawCon is for.</p>
+              <p>We recently launched Clawd Kitchen — <strong className="text-stone-900">30+ agents went live</strong> and a prize pool of ~$6,000 was rewarded to the best agents.</p>
+              <p>Now it's time to bring unlock the complete potential with ClawCon, IRL.</p>
+            </div>
+          </div>
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <div className="grid grid-cols-2 gap-px bg-stone-200 border border-stone-200 rounded-2xl overflow-hidden">
+              <StatCard value="10k+" label="Community Builders" />
+              <StatCard value="30+" label="Agents Shipped" />
+              <StatCard value="$6K" label="Prize Pool" />
+              <StatCard value="100" label="Curated Seats" />
+            </div>
+          </div>
+        </div>
+      </section>
+    );
 
-  <div class="countdown" id="countdown">
-    <div class="countdown-unit">
-      <div class="countdown-num" id="cd-days">--</div>
-      <div class="countdown-label">Days</div>
-    </div>
-    <div class="countdown-sep">:</div>
-    <div class="countdown-unit">
-      <div class="countdown-num" id="cd-hours">--</div>
-      <div class="countdown-label">Hours</div>
-    </div>
-    <div class="countdown-sep">:</div>
-    <div class="countdown-unit">
-      <div class="countdown-num" id="cd-mins">--</div>
-      <div class="countdown-label">Mins</div>
-    </div>
-    <div class="countdown-sep">:</div>
-    <div class="countdown-unit">
-      <div class="countdown-num" id="cd-secs">--</div>
-      <div class="countdown-label">Secs</div>
-    </div>
-  </div>
-
-  <div class="hero-actions">
-    <a href="#apply" class="btn-primary">Apply to Attend</a>
-    <a href="#schedule" class="btn-ghost">View Schedule</a>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <span class="ticker-item"><span class="dot"></span>100 Curated Builders</span>
-    <span class="ticker-item"><span class="dot"></span>March 08, 2026</span>
-    <span class="ticker-item"><span class="dot"></span>Bangalore, India</span>
-    <span class="ticker-item"><span class="dot"></span>Live Agent Battle</span>
-    <span class="ticker-item"><span class="dot"></span>AI × Crypto</span>
-    <span class="ticker-item"><span class="dot"></span>Invite Only</span>
-    <span class="ticker-item"><span class="dot"></span>5 Hours</span>
-    <span class="ticker-item"><span class="dot"></span>$6k Prize Pool</span>
-    <!-- duplicate for loop -->
-    <span class="ticker-item"><span class="dot"></span>100 Curated Builders</span>
-    <span class="ticker-item"><span class="dot"></span>March 08, 2026</span>
-    <span class="ticker-item"><span class="dot"></span>Bangalore, India</span>
-    <span class="ticker-item"><span class="dot"></span>Live Agent Battle</span>
-    <span class="ticker-item"><span class="dot"></span>AI × Crypto</span>
-    <span class="ticker-item"><span class="dot"></span>Invite Only</span>
-    <span class="ticker-item"><span class="dot"></span>5 Hours</span>
-    <span class="ticker-item"><span class="dot"></span>$6k Prize Pool</span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div>
-        <span class="section-label">About</span>
-        <h2 class="section-heading">Built by<br />Inner Circle.</h2>
-        <div class="about-body">
-          <p>Home to <strong>10k+ cumulative cracked builders</strong>. We believe your circle is your edge to building great products, raising capital, and finding the right audience.</p>
-          <p>We've been at the intersection of AI and onchain for over a year — running programs, shipping tools, and building the community ClawCon is for.</p>
-          <p>We launched Clawd Kitchen — <strong>30+ agents went live</strong> and a $6,000 prize pool went to the best builders.</p>
-          <p>Now it's time to unlock the complete potential of that community, IRL.</p>
+    const ScheduleItem = ({ time, title, description }) => (
+      <div className="group py-8 border-b border-stone-300 grid grid-cols-1 md:grid-cols-12 gap-4 items-start hover:bg-stone-200/50 transition-colors px-4 -mx-4 rounded-lg">
+        <div className="md:col-span-3 font-mono text-stone-500 pt-1">{time}</div>
+        <div className="md:col-span-9">
+          <h3 className="text-2xl font-medium text-stone-900 mb-2">{title}</h3>
+          <p className="text-stone-600">{description}</p>
         </div>
       </div>
-      <div class="stats-stack">
-        <div class="stat-row">
-          <div class="num">10k+</div>
-          <div class="desc">Cumulative builders across the community</div>
-        </div>
-        <div class="stat-row">
-          <div class="num">30+</div>
-          <div class="desc">Agents shipped in Clawd Kitchen</div>
-        </div>
-        <div class="stat-row">
-          <div class="num">$6K</div>
-          <div class="desc">Prize pool rewarded to top builders</div>
-        </div>
-        <div class="stat-row">
-          <div class="num">100</div>
-          <div class="desc">Curated seats. No randoms.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    );
 
-<!-- SCHEDULE -->
-<section class="section schedule-bg" id="schedule">
-  <div class="container">
-    <span class="section-label">Schedule</span>
-    <h2 class="section-heading">The Evening.</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">4:00 PM</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
-        <div class="tl-content">
-          <span class="tl-badge net">Networking</span>
-          <h3>Doors + Agent Creation Station</h3>
-          <p>Arrive, meet the room. Build your agent from the moment you walk in.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">4:30 PM</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
-        <div class="tl-content">
-          <span class="tl-badge key">Keynote</span>
-          <h3>Opening Keynote</h3>
-          <p>We start the event with a banger opener by a major player in the agent economy.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">5:00 PM</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
-        <div class="tl-content">
-          <span class="tl-badge key">Fireside I</span>
-          <h3>AI × Crypto</h3>
-          <p>Where agent infrastructure and onchain primitives collide.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">5:45 PM</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
-        <div class="tl-content">
-          <span class="tl-badge key">Fireside II</span>
-          <h3>The VC View</h3>
-          <p>What serious investors are betting on in the agent economy.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">6:45 PM</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
-        <div class="tl-content">
-          <span class="tl-badge net">Discussion</span>
-          <h3>Round Table Chat</h3>
-          <p>Deep dive with builders and industry leaders. No slides.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">7:30 PM</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
-        <div class="tl-content">
-          <span class="tl-badge fire">🔥 Main Event</span>
-          <h3>Live Agent Trading Battle</h3>
-          <p>Agents compete on Polymarket in real time. Live leaderboard. Real stakes. Visible to the whole room.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">8:00 PM</div>
-        <div class="tl-line"><div class="tl-dot"></div></div>
-        <div class="tl-content">
-          <span class="tl-badge net">Mixer</span>
-          <h3>Builder Mixer</h3>
-          <p>Open floor. No agenda. The real conversations happen here.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    const ScheduleSection = () => {
+      const items = [
+        { time: '4:00 PM', title: 'Doors + Networking', description: 'Arrive, meet the room. Agent creation station live from the start.' },
+        { time: '4:30 PM', title: 'Opening Keynote', description: 'We start the event by a banger opener by a major player.' },
+        { time: '5:00 PM', title: 'Fireside Chat I — AI × Crypto', description: 'Where agent infrastructure and onchain primitives collide.' },
+        { time: '5:45 PM', title: 'Fireside Chat II — The VC View', description: 'What serious investors are betting on in the agent economy.' },
+        { time: '6:45 PM', title: 'Round Table Chat', description: 'Deep conversation between builders, founders, and investors. No slide decks.' },
+        { time: '7:30 PM', title: 'Live Agent Trading Battle', description: 'Agents compete on Polymarket in real time. Visible leaderboard. Real stakes.' },
+        { time: '8:00 PM', title: 'Builder Mixer', description: 'Open floor. No agenda. The real conversations happen here.' },
+      ];
+      return (
+        <section id="schedule" className="py-24 px-6 bg-stone-100 border-t border-stone-200">
+          <div className="max-w-[1000px] mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <div>
+                <span className="block text-orange-600 font-medium tracking-wide mb-2 uppercase text-sm">Program Schedule</span>
+                <h2 className="text-5xl md:text-6xl text-stone-900" style={customStyles.editorialFont}>The Evening</h2>
+              </div>
+              <div className="text-stone-500">March 08, 2026 · IST Timezone</div>
+            </div>
+            <div className="border-t border-stone-300">
+              {items.map((item, i) => (
+                <ScheduleItem key={i} time={item.time} title={item.title} description={item.description} />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
 
-<!-- WHY SECTION -->
-<section class="section" id="why">
-  <div class="container">
-    <span class="section-label">Why ClawCon</span>
-    <h2 class="section-heading">Unlike any<br />conference.</h2>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon">🎯</div>
-        <h3>Invite-Only & Curated</h3>
-        <p>100 hand-picked builders. No randoms. Everyone in the room is shipping or investing in the agent economy.</p>
+    const FeatureCard = ({ icon, title, description }) => (
+      <div className="bg-white p-10 rounded-2xl border border-stone-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-6 text-orange-600">
+          {icon}
+        </div>
+        <h3 className="text-2xl mb-3 text-stone-900" style={customStyles.editorialFont}>{title}</h3>
+        <p className="text-stone-600 leading-relaxed">{description}</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">🤖</div>
-        <h3>Build While You Network</h3>
-        <p>Agent creation station running from 4 PM. Your agent can be live and competing before dinner ends.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">⚔️</div>
-        <h3>Real Stakes Competition</h3>
-        <p>Watch agents battle on Polymarket with real money. Live leaderboard. The crowd picks winners.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">🔗</div>
-        <h3>AI × Crypto, For Real</h3>
-        <p>Not another panel about what might happen. This is where people building the future actually show up.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    );
 
-<!-- BATTLE SECTION -->
-<section class="section battle-section" id="battle">
-  <div class="container">
-    <div class="battle-inner">
-      <div>
-        <span class="section-label">Main Event</span>
-        <h2 class="battle-heading">Live Agent <em>Battle.</em></h2>
-        <p class="battle-body">Bring your agent or build one on the spot. They'll compete on Polymarket prediction markets in real time — visible to the entire room. Real money. Real stakes. Live leaderboard projected for all 100 builders to watch.</p>
-        <a href="#apply" class="btn-primary">Secure Your Spot</a>
+    const FeaturesSection = () => {
+      const features = [
+        {
+          title: 'Curated Attendance',
+          description: "We manually review every application. You'll be in a room with CTOs, lead maintainers of major open source projects, and founders.",
+          icon: (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>),
+        },
+        {
+          title: 'Live Deployments',
+          description: 'Talk is cheap. Presenters are required to show live code or deployments. No pre-recorded videos allowed.',
+          icon: (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>),
+        },
+        {
+          title: 'Zero-BS Networking',
+          description: 'Structured networking sessions designed to help you find collaborators, not just exchange business cards.',
+          icon: (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>),
+        },
+        {
+          title: 'Agent Battle on Polymarket',
+          description: "Agents compete on Polymarket prediction markets in real time. Live leaderboard projected for all 100 builders. Real money. Real stakes.",
+          icon: (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>),
+        },
+      ];
+      return (
+        <section id="features" className="py-24 px-6 bg-[#faf7f2]">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="max-w-2xl mb-16">
+              <h2 className="text-5xl md:text-6xl text-stone-900 mb-6" style={customStyles.editorialFont}>What Makes ClawCon Different</h2>
+              <p className="text-xl text-stone-600">We stripped away the fluff. No vendor booths, no sales pitches. Just pure engineering and vision.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {features.map((f, i) => (
+                <FeatureCard key={i} icon={f.icon} title={f.title} description={f.description} />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    const ApplySection = () => {
+      const [clicked, setClicked] = useState(false);
+      const handleApply = () => {
+        setClicked(true);
+        setTimeout(() => setClicked(false), 2000);
+      };
+      return (
+        <section id="apply" className="py-32 px-6 bg-stone-900 text-[#faf7f2] relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/cubes.png')" }} />
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <h2 className="text-6xl md:text-8xl mb-8" style={customStyles.editorialFont}>Ready to Join?</h2>
+            <p className="text-xl md:text-2xl text-stone-400 mb-12 font-light">
+              Spaces are extremely limited. Applications are reviewed on a rolling basis.
+            </p>
+            <button
+              onClick={handleApply}
+              className="bg-orange-600 hover:bg-orange-500 text-white px-12 py-6 rounded-full text-xl font-medium transition-all duration-300 hover:scale-105"
+              style={{ boxShadow: '0 0 40px -10px rgba(234,88,12,0.5)' }}
+            >
+              {clicked ? 'Application Submitted! ✓' : 'Apply to Attend ↗'}
+            </button>
+            <p className="mt-8 text-sm text-stone-500 uppercase tracking-widest">March 08, 2026 · Bangalore, India · Invite-only + curated applications</p>
+          </div>
+        </section>
+      );
+    };
+
+    const Footer = () => (
+      <footer className="bg-[#faf7f2] border-t border-stone-200 py-12 px-6">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-stone-900 font-bold text-2xl tracking-tighter">ClawCon '26</div>
+          <div className="text-stone-500 text-sm md:text-base flex flex-col md:flex-row items-center gap-2 md:gap-6">
+            <span>Presented by Inner Circle</span>
+            <span className="hidden md:inline">·</span>
+            <span>March 08, 2026</span>
+            <span className="hidden md:inline">·</span>
+            <span>Bangalore, India</span>
+          </div>
+          <div className="flex gap-6">
+            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">Twitter</a>
+            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">LinkedIn</a>
+            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">Email</a>
+          </div>
+        </div>
+      </footer>
+    );
+
+    const HomePage = () => (
+      <div style={customStyles.body}>
+        <Nav />
+        <HeroSection />
+        <AboutSection />
+        <ScheduleSection />
+        <FeaturesSection />
+        <ApplySection />
+        <Footer />
       </div>
-      <div class="battle-viz">
-        <div class="header">
-          <span>🏆 LIVE LEADERBOARD</span>
-          <span>▲ LIVE</span>
-        </div>
-        <div class="leaderboard-row">
-          <span class="lb-rank">#1</span>
-          <span class="lb-name">AlphaAgent_v2</span>
-          <span class="lb-gain">+$840</span>
-        </div>
-        <div style="padding: 4px 0 8px 32px;">
-          <div class="lb-bar" style="width: 90%; height: 3px; border-radius: 2px;"></div>
-        </div>
-        <div class="leaderboard-row">
-          <span class="lb-rank">#2</span>
-          <span class="lb-name">Polybot_Blr</span>
-          <span class="lb-gain">+$610</span>
-        </div>
-        <div style="padding: 4px 0 8px 32px;">
-          <div class="lb-bar" style="width: 65%;"></div>
-        </div>
-        <div class="leaderboard-row">
-          <span class="lb-rank">#3</span>
-          <span class="lb-name">SigmaTrader</span>
-          <span class="lb-gain">+$390</span>
-        </div>
-        <div style="padding: 4px 0 8px 32px;">
-          <div class="lb-bar" style="width: 42%;"></div>
-        </div>
-        <div class="leaderboard-row">
-          <span class="lb-rank">#4</span>
-          <span class="lb-name">OnchainOracle</span>
-          <span class="lb-loss">-$120</span>
-        </div>
-        <div style="padding: 4px 0 8px 32px;">
-          <div class="lb-bar" style="width: 15%; background: var(--red);"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    );
 
-<!-- CTA -->
-<section class="section cta-section" id="apply">
-  <div class="cta-bg"></div>
-  <div class="container cta-content">
-    <h2>100 seats.<br />Zero filler.</h2>
-    <p>Apply now to be considered for ClawCon Bangalore. Curated invite process — we review every application.</p>
-    <a href="#" class="btn-primary">Apply to Attend →</a>
-    <p class="cta-note">March 08, 2026 · Bangalore, India · 4:00 PM onwards</p>
-  </div>
-</section>
+    const App = () => {
+      useEffect(() => {
+        const style = document.createElement('style');
+        style.textContent = `
+          @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+          body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf7f2;
+            color: #1c1917;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+          }
+          ::selection { background-color: #fed7aa; color: #7c2d12; }
+          ::-webkit-scrollbar { width: 8px; }
+          ::-webkit-scrollbar-track { background: #faf7f2; }
+          ::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 4px; }
+          ::-webkit-scrollbar-thumb:hover { background: #d6d3d1; }
+        `;
+        document.head.appendChild(style);
+        const threeScript = document.createElement('script');
+        threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+        threeScript.async = true;
+        document.head.appendChild(threeScript);
+        return () => { document.head.removeChild(style); };
+      }, []);
+      return <HomePage />;
+    };
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand"><span>Claw</span>Con '26 — Bangalore</div>
-    <div class="footer-meta">Presented by Inner Circle · March 08, 2026</div>
-    <div class="footer-links">
-      <a href="#">Twitter</a>
-      <a href="#">Apply</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Countdown to March 8, 2026 4:00 PM IST (UTC+5:30 = UTC 10:30)
-  const target = new Date('2026-03-08T10:30:00Z');
-  function update() {
-    const now = new Date();
-    const diff = target - now;
-    if (diff <= 0) {
-      document.getElementById('countdown').innerHTML = '<div style="color:var(--orange);font-size:1.5rem;font-weight:700;">Event is Live! 🔥</div>';
-      return;
-    }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
-  }
-  update();
-  setInterval(update, 1000);
-</script>
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>
