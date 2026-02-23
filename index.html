@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClawCon '26 - Bangalore | March 08, 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lobster-red: #E63946;
+            --lobster-orange: #FF6B35;
+            --deep-sea: #1D3557;
+            --ocean-blue: #457B9D;
+            --seafoam: #A8DADC;
+            --shell-cream: #F1FAEE;
+            --black: #0D1117;
+            --dark-gray: #161B22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--black);
+            color: var(--shell-cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 80px 24px;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 50%, var(--deep-sea) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(230, 57, 70, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 107, 53, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 .claw {
+            background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 .con {
+            color: var(--shell-cream);
+        }
+
+        .hero h1 .year {
+            display: block;
+            font-size: 0.4em;
+            color: var(--seafoam);
+            margin-top: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--seafoam);
+            max-width: 700px;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta-item {
+            text-align: center;
+        }
+
+        .hero-meta-item .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--ocean-blue);
+            margin-bottom: 4px;
+        }
+
+        .hero-meta-item .value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--shell-cream);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
+            color: white;
+            padding: 18px 48px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 60px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(230, 57, 70, 0.3);
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 24px;
+            background: var(--dark-gray);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .section-title .highlight {
+            color: var(--lobster-orange);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--seafoam);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .stat-card {
+            background: var(--black);
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(168, 218, 220, 0.1);
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            color: var(--seafoam);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        /* Schedule Section */
+        .schedule {
+            padding: 120px 24px;
+            background: var(--black);
+        }
+
+        .schedule-grid {
+            margin-top: 64px;
+        }
+
+        .schedule-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 32px;
+            padding: 32px 0;
+            border-bottom: 1px solid rgba(168, 218, 220, 0.1);
+            align-items: start;
+        }
+
+        @media (max-width: 600px) {
+            .schedule-item {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        .schedule-time {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--lobster-orange);
+        }
+
+        .schedule-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--shell-cream);
+        }
+
+        .schedule-content p {
+            color: var(--seafoam);
+            font-size: 0.95rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 24px;
+            background: linear-gradient(180deg, var(--dark-gray) 0%, var(--deep-sea) 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 64px;
+        }
+
+        .feature-card {
+            background: rgba(13, 17, 23, 0.8);
+            padding: 40px 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(168, 218, 220, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--lobster-orange);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--shell-cream);
+        }
+
+        .feature-card p {
+            color: var(--seafoam);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 24px;
+            background: var(--black);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--seafoam);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 24px;
+            background: var(--dark-gray);
+            text-align: center;
+            border-top: 1px solid rgba(168, 218, 220, 0.1);
+        }
+
+        footer p {
+            color: var(--ocean-blue);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--lobster-orange);
+            text-decoration: none;
+        }
+
+        /* Animated claw decoration */
+        .claw-decoration {
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.03;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .claw-decoration.left {
+            left: -50px;
+            top: 20%;
+            transform: rotate(-30deg);
+        }
+
+        .claw-decoration.right {
+            right: -50px;
+            bottom: 20%;
+            transform: rotate(30deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="claw-decoration left">🦞</span>
+        <span class="claw-decoration right">🦞</span>
+        
+        <span class="badge">Inner Circle Presents</span>
+        
+        <h1>
+            <span class="claw">Claw</span><span class="con">Con</span>
+            <span class="year">Bangalore · March 08, 2026</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+            Where the people building the agent economy meet the agents they've built. 
+            One curated evening. Keynotes, live agent competitions, and conversations 
+            that don't happen at regular conferences.
+        </p>
+        
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <div class="label">Date</div>
+                <div class="value">March 08, 2026</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="label">Location</div>
+                <div class="value">Bangalore, India</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="label">Duration</div>
+                <div class="value">5 Hours</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="label">Capacity</div>
+                <div class="value">100 Builders</div>
+            </div>
+        </div>
+        
+        <a href="#apply" class="cta-button">Apply to Attend</a>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div>
+                    <h2 class="section-title">Hosted by <span class="highlight">Inner Circle</span></h2>
+                    <div class="about-text">
+                        <p>
+                            Home to 10k+ cumulative cracked builders. We believe your circle 
+                            is your edge to building great products, raising capital, and 
+                            finding the right audience.
+                        </p>
+                        <p>
+                            We've been at the intersection of AI and onchain for over a year, 
+                            running programs, shipping tools, and building the community that 
+                            ClawCon is for.
+                        </p>
+                        <p>
+                            We recently launched Clawd Kitchen — 30+ agents went live and a 
+                            prize pool of 6000 USD was rewarded to the best agents.
+                        </p>
+                        <p><strong>Now, it's time to unlock the complete potential with ClawCon, IRL.</strong></p>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">10k+</div>
+                        <div class="label">Community Builders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">30+</div>
+                        <div class="label">Agents Shipped</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">$6k</div>
+                        <div class="label">Prize Pool</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">100</div>
+                        <div class="label">Curated Seats</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule">
+        <div class="container">
+            <h2 class="section-title">Program <span class="highlight">Schedule</span></h2>
+            
+            <div class="schedule-grid">
+                <div class="schedule-item">
+                    <div class="schedule-time">4:00 PM</div>
+                    <div class="schedule-content">
+                        <h3>Doors + Networking</h3>
+                        <p>Arrive, meet the room. Agent creation station live from the start.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">4:30 PM</div>
+                    <div class="schedule-content">
+                        <h3>Opening Keynote</h3>
+                        <p>We start the event with a banger opener by a major player.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">5:00 PM</div>
+                    <div class="schedule-content">
+                        <h3>Fireside Chat I — AI × Crypto</h3>
+                        <p>Where agent infrastructure and onchain primitives collide.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">5:45 PM</div>
+                    <div class="schedule-content">
+                        <h3>Fireside Chat II — The VC View</h3>
+                        <p>What serious investors are betting on in the agent economy.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">6:45 PM</div>
+                    <div class="schedule-content">
+                        <h3>Round Table Chat</h3>
+                        <p>Deep dive discussion with builders and industry leaders.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">7:30 PM</div>
+                    <div class="schedule-content">
+                        <h3>🔥 Live Agent Trading Battle</h3>
+                        <p>Agents compete on Polymarket in real time. Visible leaderboard. Real stakes.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">8:00 PM</div>
+                    <div class="schedule-content">
+                        <h3>Builder Mixer</h3>
+                        <p>Open floor. No agenda. The real conversations happen here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What Makes <span class="highlight">ClawCon</span> Different</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">🎯</div>
+                    <h3>Invite-Only + Curated</h3>
+                    <p>100 hand-picked builders. No randoms. Everyone in the room is shipping or investing.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">🤖</div>
+                    <h3>Live Agent Creation</h3>
+                    <p>Agent creation station running from the start. Build while you network.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">⚔️</div>
+                    <h3>Real Stakes Competition</h3>
+                    <p>Watch agents battle it out on Polymarket with real money. Live leaderboard.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">💡</div>
+                    <h3>AI × Crypto Focus</h3>
+                    <p>Where agent infrastructure meets onchain primitives. The future is here.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="apply">
+        <div class="container">
+            <h2>Ready to <span style="color: var(--lobster-orange)">Join</span>?</h2>
+            <p>Apply now for your spot at ClawCon Bangalore. Limited to 100 curated builders.</p>
+            <a href="#" class="cta-button">Apply to Attend</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>ClawCon '26 — Presented by <a href="#">Inner Circle</a></p>
+            <p style="margin-top: 12px;">March 08, 2026 · Bangalore, India</p>
+        </div>
+    </footer>
+</body>
+</html>
