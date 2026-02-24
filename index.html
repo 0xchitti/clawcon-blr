@@ -238,17 +238,7 @@
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       };
       return (
-        <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 mix-blend-difference text-white pointer-events-none">
-          <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-            <div className="text-xl font-medium tracking-tight pointer-events-auto mix-blend-difference">CC '26</div>
-            <div className="hidden md:flex gap-8 text-sm font-medium pointer-events-auto mix-blend-difference">
-              <button onClick={() => scrollTo('about')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">About</button>
-              <button onClick={() => scrollTo('schedule')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Schedule</button>
-              <button onClick={() => scrollTo('features')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Features</button>
-              <button onClick={() => scrollTo('apply')} className="hover:opacity-70 transition-opacity bg-transparent border-none cursor-pointer text-white">Apply</button>
-            </div>
-          </div>
-        </nav>
+
       );
     };
 
