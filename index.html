@@ -274,13 +274,20 @@
           <p className="text-xl md:text-2xl italic text-stone-600 mb-8" style={customStyles.editorialFont}>
             Bangalore · March 08, 2026
           </p>
-          <div className="pointer-events-auto flex justify-center">
+          <div className="pointer-events-auto flex justify-center mb-10">
             <a href="#apply" onClick={(e) => { e.preventDefault(); const el = document.getElementById('apply'); if(el){ const top = el.getBoundingClientRect().top + window.scrollY - 56; window.scrollTo({top, behavior:'smooth'}); }}} className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-8 py-3.5 rounded-full text-base font-medium transition-colors duration-300 shadow-lg shadow-orange-900/20 group">
               Apply to Attend
               <svg className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
             </a>
+          </div>
+          <div className="pointer-events-none w-screen relative left-1/2 -translate-x-1/2 overflow-hidden" style={{maskImage:'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', WebkitMaskImage:'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'}}>
+            <div className="flex gap-16 items-center whitespace-nowrap" style={{animation:'marquee 28s linear infinite'}}>
+              {[...Array(16)].map((_, i) => (
+                <div key={i} className="w-28 h-7 bg-stone-400/25 rounded flex-shrink-0" />
+              ))}
+            </div>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#faf7f2] to-transparent z-0 pointer-events-none"></div>
@@ -331,7 +338,7 @@
     const AboutSection = () => (
       <section id="about" className="py-24 px-6 bg-stone-100 text-center">
         <div className="max-w-2xl mx-auto mb-16">
-          <span className="block text-orange-600 font-medium tracking-wide mb-4 uppercase text-sm">Hosted by Inner Circle</span>
+          <span className="block text-orange-600 font-medium tracking-wide mb-4 uppercase text-sm">Presented by AI Weekends from the house of Inner Circle</span>
           <h2 className="text-5xl md:text-6xl text-stone-900 leading-tight mb-8" style={customStyles.editorialFont}>
             Built by builders.<br />
             <span className="text-stone-400 italic">For the agent economy.</span>
@@ -343,14 +350,14 @@
             Clawd Kitchen sent 30+ agents live with a $6K prize pool. ClawCon is the IRL version of that energy.
           </p>
         </div>
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2">
           {[
             { title: 'Curated Attendance', desc: "We manually review every application. You'll be in a room with CTOs, lead maintainers of major open source projects, and founders." },
             { title: 'Live Deployments', desc: 'Talk is cheap. Presenters are required to show live code or deployments. No pre-recorded videos allowed.' },
             { title: 'Zero-BS Networking', desc: 'Structured networking sessions designed to help you find collaborators, not just exchange business cards.' },
             { title: 'Agent Battle on Polymarket', desc: 'Agents compete on Polymarket prediction markets in real time. Live leaderboard projected for all 100 builders. Real money. Real stakes.' },
           ].map((f, i) => (
-            <div key={i} className="bg-[#faf7f2] p-8 rounded-2xl text-left">
+            <div key={i} className="border-t border-stone-300 py-8 px-6 text-left">
               <h3 className="text-xl font-medium text-stone-900 mb-3" style={customStyles.editorialFont}>{f.title}</h3>
               <p className="text-stone-600 leading-relaxed">{f.desc}</p>
             </div>
@@ -413,12 +420,12 @@
 
     const ScheduleSection = () => {
       const items = [
-        { time: '4:00 PM', title: 'Doors + Networking', description: 'Arrive, meet the room. Agent creation station live from the start.' },
-        { time: '4:30 PM', title: 'Opening Keynote', description: 'We start the event by a banger opener by a major player.' },
-        { time: '5:00 PM', title: 'Fireside Chat I - AI × Crypto', description: 'Where agent infrastructure and onchain primitives collide.' },
-        { time: '5:45 PM', title: 'Fireside Chat II - The VC View', description: 'What serious investors are betting on in the agent economy.' },
-        { time: '6:45 PM', title: 'Round Table Chat', description: 'Deep conversation between builders, founders, and investors. No slide decks.' },
-        { time: '7:30 PM', title: 'Live Agent Trading Battle', description: 'Agents compete on Polymarket in real time. Visible leaderboard. Real stakes.' },
+        { time: '4:00 PM', title: 'Doors Open', description: 'Everyone arrives, hang around — catch up with each other building in AI.' },
+        { time: '4:30 PM', title: 'Opening Keynote', description: 'TBD Partner, to speak about how AI space is scaling fast.' },
+        { time: '5:00 PM', title: 'Fireside Chat I — AI × Crypto', description: 'Where agent infrastructure and onchain primitives collide.' },
+        { time: '5:45 PM', title: 'Fireside Chat II — The VC View', description: 'What serious investors are betting on in the agent economy.' },
+        { time: '6:45 PM', title: 'Demo Day by GrowthX', description: 'Deep conversation between builders, founders, and investors. No slide decks.' },
+        { time: '7:30 PM', title: 'Live Agent Trading Battle', description: 'Powered by Avantis. Builders live trade and compete with each other.' },
         { time: '8:00 PM', title: 'Builder Mixer', description: 'Open floor. No agenda. The real conversations happen here.' },
       ];
       return (
@@ -542,7 +549,6 @@
         <AboutSection />
         <SpeakersSection />
         <ScheduleSection />
-        <PartnersSection />
         <ApplySection />
         <Footer />
       </div>
@@ -566,6 +572,7 @@
           ::-webkit-scrollbar-track { background: #faf7f2; }
           ::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 4px; }
           ::-webkit-scrollbar-thumb:hover { background: #d6d3d1; }
+          @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         `;
         document.head.appendChild(style);
         const threeScript = document.createElement('script');
