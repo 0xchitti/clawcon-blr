@@ -249,8 +249,8 @@
             <span className="text-stone-900 font-bold text-lg tracking-tighter" style={customStyles.editorialFont}>ClawCon '26</span>
             <div className="flex items-center gap-8">
               <button onClick={() => scrollTo('about')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">About</button>
+              <button onClick={() => scrollTo('speakers')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">Speakers</button>
               <button onClick={() => scrollTo('schedule')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">Schedule</button>
-              <button onClick={() => scrollTo('features')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">Why ClawCon</button>
               <button onClick={() => scrollTo('apply')} className="text-sm bg-orange-600 hover:bg-orange-700 text-white px-4 py-1.5 rounded-full transition-colors">Apply</button>
             </div>
           </div>
@@ -262,6 +262,12 @@
       <section className="relative h-screen w-full flex flex-col items-center justify-end pb-16 md:pb-24 overflow-hidden">
         <ThreeCanvas />
         <div className="relative z-10 text-center pointer-events-none px-6">
+          <div className="flex justify-center mb-6 pointer-events-auto">
+            <span className="inline-flex items-center gap-2 bg-orange-600/10 border border-orange-500/20 text-orange-700 text-xs font-medium uppercase tracking-wider px-4 py-1.5 rounded-full">
+              <span className="w-1.5 h-1.5 bg-orange-600 rounded-full animate-pulse inline-block"></span>
+              Applications Open · Limited Capacity
+            </span>
+          </div>
           <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4 mix-blend-multiply" style={customStyles.editorialFont}>
             ClawCon '26
           </h1>
@@ -315,18 +321,61 @@
     );
 
     const AboutSection = () => (
-      <section id="about" className="py-24 md:py-32 px-6 bg-stone-100 relative z-20 text-center">
-        <div className="max-w-3xl mx-auto">
-          <span className="block text-orange-600 font-medium tracking-wide mb-6 uppercase text-sm">Hosted by Inner Circle</span>
-          <h2 className="text-5xl md:text-6xl text-stone-900 leading-tight mb-12" style={customStyles.editorialFont}>
+      <section id="about" className="py-24 px-6 bg-stone-100 text-center">
+        <div className="max-w-2xl mx-auto">
+          <span className="block text-orange-600 font-medium tracking-wide mb-4 uppercase text-sm">Hosted by Inner Circle</span>
+          <h2 className="text-5xl md:text-6xl text-stone-900 leading-tight mb-8" style={customStyles.editorialFont}>
             Built by builders.<br />
             <span className="text-stone-400 italic">For the agent economy.</span>
           </h2>
-          <div className="space-y-6 text-lg text-stone-700 leading-relaxed text-left">
-            <p>Home to <strong className="text-stone-900">10k+ cumulative cracked builders</strong>. We believe your circle is your edge to building great products, raising capital, and finding the right audience.</p>
-            <p>We've been at the intersection of AI and onchain for over a year — running programs, shipping tools, and building the community that ClawCon is for.</p>
-            <p>We recently launched Clawd Kitchen — <strong className="text-stone-900">30+ agents went live</strong> and a prize pool of ~$6,000 was rewarded to the best agents.</p>
-            <p>Now it's time to unlock the complete potential with ClawCon, IRL.</p>
+          <p className="text-lg text-stone-600 leading-relaxed mb-4">
+            Inner Circle is home to 10,000+ cracked builders globally — founders, engineers, designers, and creators who've each other's backs. We've been at the intersection of AI and onchain for over a year, shipping tools and running programs.
+          </p>
+          <p className="text-lg text-stone-600 leading-relaxed">
+            Clawd Kitchen sent 30+ agents live with a $6K prize pool. ClawCon is the IRL version of that energy.
+          </p>
+        </div>
+      </section>
+    );
+
+    const SpeakerCard = ({ name, role }) => (
+      <div className="flex flex-col items-center text-center gap-3">
+        <div className="w-20 h-20 rounded-full bg-stone-200 flex items-center justify-center text-stone-400">
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <div>
+          <p className="font-medium text-stone-900">{name}</p>
+          <p className="text-sm text-stone-500 mt-0.5">{role}</p>
+        </div>
+      </div>
+    );
+
+    const SpeakersSection = () => (
+      <section id="speakers" className="py-24 px-6 bg-[#faf7f2] text-center">
+        <div className="max-w-4xl mx-auto">
+          <span className="block text-orange-600 font-medium tracking-wide mb-2 uppercase text-sm">Line Up</span>
+          <h2 className="text-5xl md:text-6xl text-stone-900 mb-3" style={customStyles.editorialFont}>Speakers</h2>
+          <p className="text-stone-500 mb-16">Announcements coming soon. Stay tuned.</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+            <SpeakerCard name="TBA" role="Opening Keynote" />
+            <SpeakerCard name="TBA" role="Fireside Chat I — AI × Crypto" />
+            <SpeakerCard name="TBA" role="Fireside Chat II — VC View" />
+            <SpeakerCard name="TBA" role="Round Table" />
+          </div>
+        </div>
+      </section>
+    );
+
+    const PartnersSection = () => (
+      <section id="partners" className="py-20 px-6 bg-stone-100 text-center">
+        <div className="max-w-4xl mx-auto">
+          <span className="block text-stone-400 font-medium tracking-wide mb-10 uppercase text-sm">Partners & Sponsors</span>
+          <div className="flex flex-wrap justify-center items-center gap-10">
+            {[1,2,3,4,5].map(i => (
+              <div key={i} className="w-32 h-10 bg-stone-300/60 rounded-lg" />
+            ))}
           </div>
         </div>
       </section>
@@ -472,8 +521,10 @@
         <Navbar />
         <HeroSection />
         <AboutSection />
+        <SpeakersSection />
         <ScheduleSection />
         <FeaturesSection />
+        <PartnersSection />
         <ApplySection />
         <Footer />
       </div>
