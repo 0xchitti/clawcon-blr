@@ -269,7 +269,7 @@
         {/* Text content — cleanly below the 3D */}
         <div className="bg-[#faf7f2] text-center px-6 pt-2 pb-16">
           <div className="flex justify-center mb-5">
-            <span className="inline-flex items-center gap-2 bg-white text-stone-800 text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-full shadow-md border border-stone-100">
+            <span className="inline-flex items-center gap-2 text-orange-600 text-xs font-semibold uppercase tracking-widest">
               <span className="w-1.5 h-1.5 bg-orange-600 rounded-full animate-pulse inline-block"></span>
               Applications Open · Limited Capacity
             </span>
@@ -277,10 +277,14 @@
           <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4" style={customStyles.editorialFont}>
             ClawCon '26
           </h1>
-          <p className="text-xl md:text-2xl italic text-stone-600 mb-8" style={customStyles.editorialFont}>
-            Bangalore · March 08, 2026
-          </p>
-          <div className="flex justify-center mb-10">
+          <div className="flex items-center justify-center gap-3 mb-8 flex-wrap">
+            <span className="text-lg md:text-xl italic text-stone-500" style={customStyles.editorialFont}>Local Host Office</span>
+            <span className="text-stone-300">·</span>
+            <img src="/machete-logo.svg" style={{height:'18px',width:'auto',opacity:0.5}} alt="Machete" />
+            <span className="text-stone-300">·</span>
+            <span className="text-lg md:text-xl italic text-stone-500" style={customStyles.editorialFont}>Bangalore · March 08, 2026</span>
+          </div>
+          <div className="flex justify-center mb-16">
             <a href="#apply" onClick={(e) => { e.preventDefault(); const el = document.getElementById('apply'); if(el){ const top = el.getBoundingClientRect().top + window.scrollY - 56; window.scrollTo({top, behavior:'smooth'}); }}} className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-8 py-3.5 rounded-full text-base font-medium transition-colors duration-300 shadow-lg shadow-orange-900/20 group">
               Apply to Attend
               <svg className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -349,24 +353,11 @@
             <span className="text-stone-400 italic">For the agent economy.</span>
           </h2>
           <p className="text-lg text-stone-600 leading-relaxed mb-4">
-            Inner Circle is home to 10,000+ cracked builders globally — founders, engineers, designers, and creators who've each other's backs. We've been at the intersection of AI and onchain for over a year, shipping tools and running programs.
+            AI Weekends runs weekend co-builds where builders ship real ideas — no tutorials, no courses, just output. Inner Circle is home to 10,000+ founders, engineers, and creators globally who've each other's backs at the intersection of AI and onchain.
           </p>
           <p className="text-lg text-stone-600 leading-relaxed">
-            Clawd Kitchen sent 30+ agents live with a $6K prize pool. ClawCon is the IRL version of that energy.
+            Together, we've sent 30+ agents live, rewarded $6K through Clawd Kitchen, and built the community that shows up when the real work starts. ClawCon is where both worlds collide — IRL.
           </p>
-        </div>
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2">
-          {[
-            { title: 'Curated Attendance', desc: "We manually review every application. You'll be in a room with CTOs, lead maintainers of major open source projects, and founders." },
-            { title: 'Live Deployments', desc: 'Talk is cheap. Presenters are required to show live code or deployments. No pre-recorded videos allowed.' },
-            { title: 'Zero-BS Networking', desc: 'Structured networking sessions designed to help you find collaborators, not just exchange business cards.' },
-            { title: 'Agent Battle on Polymarket', desc: 'Agents compete on Polymarket prediction markets in real time. Live leaderboard projected for all 100 builders. Real money. Real stakes.' },
-          ].map((f, i) => (
-            <div key={i} className="border-t border-stone-300 py-8 px-6 text-left">
-              <h3 className="text-xl font-medium text-stone-900 mb-3" style={customStyles.editorialFont}>{f.title}</h3>
-              <p className="text-stone-600 leading-relaxed">{f.desc}</p>
-            </div>
-          ))}
         </div>
       </section>
     );
@@ -552,8 +543,8 @@
         <Navbar />
         <HeroSection />
         <AboutSection />
-        <SpeakersSection />
         <ScheduleSection />
+        <SpeakersSection />
         <ApplySection />
         <Footer />
       </div>
