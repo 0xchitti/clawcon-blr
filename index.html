@@ -268,12 +268,12 @@
 
         {/* Text content — cleanly below the 3D */}
         <div className="bg-[#faf7f2] text-center px-6 pt-2 pb-16">
-          <div className="flex justify-center mb-5">
+          {/* <div className="flex justify-center mb-5">
             <span className="inline-flex items-center gap-2 text-orange-600 text-xs font-semibold uppercase tracking-widest">
               <span className="w-1.5 h-1.5 bg-orange-600 rounded-full animate-pulse inline-block"></span>
               Applications Open · Limited Capacity
             </span>
-          </div>
+          </div> */}
           <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4" style={customStyles.editorialFont}>
             ClawCon '26
           </h1>
@@ -283,7 +283,7 @@
             <span className="text-lg md:text-xl italic text-stone-500" style={customStyles.editorialFont}>Bangalore · March 08, 2026</span>
           </div>
           <div className="flex justify-center mb-16">
-            <a href="#apply" onClick={(e) => { e.preventDefault(); const el = document.getElementById('apply'); if(el){ const top = el.getBoundingClientRect().top + window.scrollY - 56; window.scrollTo({top, behavior:'smooth'}); }}} className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-8 py-3.5 rounded-full text-base font-medium transition-colors duration-300 shadow-lg shadow-orange-900/20 group">
+            <a href="#apply" onClick={(e) => { e.preventDefault(); const el = document.getElementById('apply'); if(el){ const top = el.getBoundingClientRect().top + window.scrollY - 56; window.scrollTo({top, behavior:'smooth'}); }}} className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white px-8 py-3.5 rounded-full text-base font-medium transition-all duration-300 hover:scale-105 group" style={{boxShadow:'0 0 30px -8px rgba(234,88,12,0.4)'}}>
               Apply to Attend
               <svg className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
