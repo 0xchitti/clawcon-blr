@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClawCon '26 — Bangalore</title>
+  <title>ClawCon '26 - Bangalore</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  
+
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
@@ -258,47 +258,51 @@
       );
     };
 
-    const HeroSection = () => {
+    const HeroSection = () => (
+      <section className="relative h-screen w-full flex flex-col items-center justify-end pb-16 md:pb-24 overflow-hidden">
+        <ThreeCanvas />
+        <div className="relative z-10 text-center pointer-events-none px-6">
+          <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4 mix-blend-multiply" style={customStyles.editorialFont}>
+            ClawCon '26
+          </h1>
+          <p className="text-xl md:text-2xl italic text-stone-600" style={customStyles.editorialFont}>
+            Bangalore · March 08, 2026
+          </p>
+        </div>
+        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#faf7f2] to-transparent z-0 pointer-events-none"></div>
+      </section>
+    );
+
+    const IntroSection = () => {
       const scrollTo = (id) => {
         const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 56;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
       };
       return (
-        <section className="relative h-screen w-full flex flex-col justify-end pb-12 md:pb-24 overflow-hidden">
-          <ThreeCanvas />
-          <div className="relative z-10 w-full px-6 max-w-[1400px] mx-auto pointer-events-none">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-              <div className="lg:col-span-8">
-                <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4 mix-blend-multiply" style={customStyles.editorialFont}>
-                  ClawCon '26
-                </h1>
-                <p className="text-xl md:text-3xl italic text-stone-600 mb-8" style={customStyles.editorialFont}>
-                  Bangalore · March 08, 2026
-                </p>
-              </div>
-              <div className="lg:col-span-4 pb-4">
-                <p className="text-lg md:text-xl leading-relaxed text-stone-800 max-w-md mb-8 backdrop-blur-sm">
-                  Where the people building the agent economy meet the agents they've built. One curated evening. Keynotes, live agent competitions, and conversations that don't happen at regular conferences.
-                </p>
-                <div className="flex flex-wrap gap-3 mb-8 pointer-events-auto">
-                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">March 08</span>
-                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">Bangalore</span>
-                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">5 Hours</span>
-                  <span className="px-3 py-1 bg-white/60 border border-stone-200 rounded-md text-sm text-stone-600">100 Builders</span>
-                </div>
-                <button
-                  onClick={() => scrollTo('apply')}
-                  className="pointer-events-auto inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-full text-lg font-medium transition-colors duration-300 shadow-lg shadow-orange-900/10 group"
-                >
-                  Apply to Attend
-                  <svg className="w-5 h-5 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </button>
-              </div>
+        <section className="py-24 md:py-32 px-6 bg-[#faf7f2] text-center">
+          <div className="max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl leading-relaxed text-stone-700 mb-10">
+              Where the people building the agent economy meet the agents they've built. One curated evening. Keynotes, live agent competitions, and conversations that don't happen at regular conferences.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
+              <span className="px-4 py-1.5 bg-stone-100 border border-stone-200 rounded-full text-sm text-stone-600">March 08</span>
+              <span className="px-4 py-1.5 bg-stone-100 border border-stone-200 rounded-full text-sm text-stone-600">Bangalore</span>
+              <span className="px-4 py-1.5 bg-stone-100 border border-stone-200 rounded-full text-sm text-stone-600">5 Hours</span>
+              <span className="px-4 py-1.5 bg-stone-100 border border-stone-200 rounded-full text-sm text-stone-600">100 Builders</span>
             </div>
+            <button
+              onClick={() => scrollTo('apply')}
+              className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-10 py-4 rounded-full text-lg font-medium transition-colors duration-300 shadow-lg shadow-orange-900/10 group"
+            >
+              Apply to Attend
+              <svg className="w-5 h-5 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </button>
           </div>
-          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#faf7f2] to-transparent z-0 pointer-events-none"></div>
         </section>
       );
     };
@@ -311,22 +315,18 @@
     );
 
     const AboutSection = () => (
-      <section id="about" className="py-24 md:py-32 px-6 bg-[#faf7f2] relative z-20">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          <div className="lg:col-span-5">
-            <span className="block text-orange-600 font-medium tracking-wide mb-6 uppercase text-sm">Hosted by Inner Circle</span>
-            <h2 className="text-5xl md:text-6xl text-stone-900 leading-tight" style={customStyles.editorialFont}>
-              Built by builders.<br />
-              <span className="text-stone-400 italic">For the agent economy.</span>
-            </h2>
-          </div>
-          <div className="lg:col-span-7 lg:pt-16">
-            <div className="space-y-6 text-lg text-stone-700 leading-relaxed">
-              <p>Home to <strong className="text-stone-900">10k+ cumulative cracked builders</strong>. We believe your circle is your edge to building great products, raising capital, and finding the right audience.</p>
-              <p>We’ve been at the intersection of AI and onchain for over a year — running programs, shipping tools, and building the community that ClawCon is for.</p>
-              <p>We recently launched Clawd Kitchen — <strong className="text-stone-900">30+ agents went live</strong> and a prize pool of ~$6,000 was rewarded to the best agents.</p>
-              <p>Now it’s time to unlock the complete potential with ClawCon, IRL.</p>
-            </div>
+      <section id="about" className="py-24 md:py-32 px-6 bg-stone-100 relative z-20 text-center">
+        <div className="max-w-3xl mx-auto">
+          <span className="block text-orange-600 font-medium tracking-wide mb-6 uppercase text-sm">Hosted by Inner Circle</span>
+          <h2 className="text-5xl md:text-6xl text-stone-900 leading-tight mb-12" style={customStyles.editorialFont}>
+            Built by builders.<br />
+            <span className="text-stone-400 italic">For the agent economy.</span>
+          </h2>
+          <div className="space-y-6 text-lg text-stone-700 leading-relaxed text-left">
+            <p>Home to <strong className="text-stone-900">10k+ cumulative cracked builders</strong>. We believe your circle is your edge to building great products, raising capital, and finding the right audience.</p>
+            <p>We've been at the intersection of AI and onchain for over a year — running programs, shipping tools, and building the community that ClawCon is for.</p>
+            <p>We recently launched Clawd Kitchen — <strong className="text-stone-900">30+ agents went live</strong> and a prize pool of ~$6,000 was rewarded to the best agents.</p>
+            <p>Now it's time to unlock the complete potential with ClawCon, IRL.</p>
           </div>
         </div>
       </section>
@@ -346,8 +346,8 @@
       const items = [
         { time: '4:00 PM', title: 'Doors + Networking', description: 'Arrive, meet the room. Agent creation station live from the start.' },
         { time: '4:30 PM', title: 'Opening Keynote', description: 'We start the event by a banger opener by a major player.' },
-        { time: '5:00 PM', title: 'Fireside Chat I — AI × Crypto', description: 'Where agent infrastructure and onchain primitives collide.' },
-        { time: '5:45 PM', title: 'Fireside Chat II — The VC View', description: 'What serious investors are betting on in the agent economy.' },
+        { time: '5:00 PM', title: 'Fireside Chat I - AI × Crypto', description: 'Where agent infrastructure and onchain primitives collide.' },
+        { time: '5:45 PM', title: 'Fireside Chat II - The VC View', description: 'What serious investors are betting on in the agent economy.' },
         { time: '6:45 PM', title: 'Round Table Chat', description: 'Deep conversation between builders, founders, and investors. No slide decks.' },
         { time: '7:30 PM', title: 'Live Agent Trading Battle', description: 'Agents compete on Polymarket in real time. Visible leaderboard. Real stakes.' },
         { time: '8:00 PM', title: 'Builder Mixer', description: 'Open floor. No agenda. The real conversations happen here.' },
@@ -355,12 +355,10 @@
       return (
         <section id="schedule" className="py-24 px-6 bg-stone-100 border-t border-stone-200">
           <div className="max-w-[1000px] mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-              <div>
-                <span className="block text-orange-600 font-medium tracking-wide mb-2 uppercase text-sm">Program Schedule</span>
-                <h2 className="text-5xl md:text-6xl text-stone-900" style={customStyles.editorialFont}>The Evening</h2>
-              </div>
-              <div className="text-stone-500">March 08, 2026 · IST Timezone</div>
+            <div className="text-center mb-16">
+              <span className="block text-orange-600 font-medium tracking-wide mb-2 uppercase text-sm">Program Schedule</span>
+              <h2 className="text-5xl md:text-6xl text-stone-900 mb-3" style={customStyles.editorialFont}>The Evening</h2>
+              <p className="text-stone-500">March 08, 2026 · IST Timezone</p>
             </div>
             <div className="border-t border-stone-300">
               {items.map((item, i) => (
@@ -408,7 +406,7 @@
       return (
         <section id="features" className="py-24 px-6 bg-[#faf7f2]">
           <div className="max-w-[1400px] mx-auto">
-            <div className="max-w-2xl mb-16">
+            <div className="max-w-2xl mx-auto text-center mb-16">
               <h2 className="text-5xl md:text-6xl text-stone-900 mb-6" style={customStyles.editorialFont}>What Makes ClawCon Different</h2>
               <p className="text-xl text-stone-600">We stripped away the fluff. No vendor booths, no sales pitches. Just pure engineering and vision.</p>
             </div>
@@ -473,6 +471,7 @@
       <div style={customStyles.body}>
         <Navbar />
         <HeroSection />
+        <IntroSection />
         <AboutSection />
         <ScheduleSection />
         <FeaturesSection />
