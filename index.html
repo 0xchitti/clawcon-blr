@@ -259,22 +259,28 @@
     };
 
     const HeroSection = () => (
-      <section className="relative h-screen w-full flex flex-col items-center justify-end pb-16 md:pb-24 overflow-hidden">
-        <ThreeCanvas />
-        <div className="relative z-10 text-center pointer-events-none px-6">
-          <div className="flex justify-center mb-6 pointer-events-auto">
-            <span className="inline-flex items-center gap-2 bg-white text-stone-800 text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-full shadow-md">
+      <div>
+        {/* 3D canvas — pure visual, no text overlay */}
+        <div className="relative w-full overflow-hidden" style={{height:'65vh'}}>
+          <ThreeCanvas />
+          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#faf7f2] to-transparent pointer-events-none" style={{zIndex:1}} />
+        </div>
+
+        {/* Text content — cleanly below the 3D */}
+        <div className="bg-[#faf7f2] text-center px-6 pt-2 pb-16">
+          <div className="flex justify-center mb-5">
+            <span className="inline-flex items-center gap-2 bg-white text-stone-800 text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-full shadow-md border border-stone-100">
               <span className="w-1.5 h-1.5 bg-orange-600 rounded-full animate-pulse inline-block"></span>
               Applications Open · Limited Capacity
             </span>
           </div>
-          <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4 mix-blend-multiply" style={customStyles.editorialFont}>
+          <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4" style={customStyles.editorialFont}>
             ClawCon '26
           </h1>
           <p className="text-xl md:text-2xl italic text-stone-600 mb-8" style={customStyles.editorialFont}>
             Bangalore · March 08, 2026
           </p>
-          <div className="pointer-events-auto flex justify-center mb-10">
+          <div className="flex justify-center mb-10">
             <a href="#apply" onClick={(e) => { e.preventDefault(); const el = document.getElementById('apply'); if(el){ const top = el.getBoundingClientRect().top + window.scrollY - 56; window.scrollTo({top, behavior:'smooth'}); }}} className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-8 py-3.5 rounded-full text-base font-medium transition-colors duration-300 shadow-lg shadow-orange-900/20 group">
               Apply to Attend
               <svg className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -282,16 +288,15 @@
               </svg>
             </a>
           </div>
-          <div className="pointer-events-none w-screen relative left-1/2 -translate-x-1/2 overflow-hidden" style={{maskImage:'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', WebkitMaskImage:'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'}}>
+          <div className="w-full overflow-hidden" style={{maskImage:'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', WebkitMaskImage:'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'}}>
             <div className="flex gap-16 items-center whitespace-nowrap" style={{animation:'marquee 28s linear infinite'}}>
               {[...Array(16)].map((_, i) => (
-                <div key={i} className="w-28 h-7 bg-stone-400/25 rounded flex-shrink-0" />
+                <div key={i} className="w-28 h-7 bg-stone-300/60 rounded flex-shrink-0" />
               ))}
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#faf7f2] to-transparent z-0 pointer-events-none"></div>
-      </section>
+      </div>
     );
 
     const IntroSection = () => {
