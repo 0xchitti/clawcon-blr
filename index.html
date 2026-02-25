@@ -234,6 +234,26 @@
 
 
 
+    const Navbar = () => {
+      const scrollTo = (id) => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      };
+      return (
+        <nav style={{position:'sticky',top:0,zIndex:50}} className="w-full bg-[#faf7f2]/90 backdrop-blur-md border-b border-stone-200/60">
+          <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between h-14">
+            <span className="text-stone-900 font-bold text-lg tracking-tighter" style={customStyles.editorialFont}>ClawCon '26</span>
+            <div className="flex items-center gap-8">
+              <button onClick={() => scrollTo('about')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">About</button>
+              <button onClick={() => scrollTo('schedule')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">Schedule</button>
+              <button onClick={() => scrollTo('features')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">Why ClawCon</button>
+              <button onClick={() => scrollTo('apply')} className="text-sm bg-orange-600 hover:bg-orange-700 text-white px-4 py-1.5 rounded-full transition-colors">Apply</button>
+            </div>
+          </div>
+        </nav>
+      );
+    };
+
     const HeroSection = () => {
       const scrollTo = (id) => {
         const el = document.getElementById(id);
@@ -243,12 +263,6 @@
         <section className="relative h-screen w-full flex flex-col justify-end pb-12 md:pb-24 overflow-hidden">
           <ThreeCanvas />
           <div className="relative z-10 w-full px-6 max-w-[1400px] mx-auto pointer-events-none">
-            <div className="mb-6 pointer-events-auto">
-              <span className="inline-flex items-center gap-3">
-                <img src="/ic-logo.svg" style={{height:'44px',width:'auto',display:'block',border:'none',outline:'none',boxShadow:'none'}} alt="Inner Circle" />
-                <span className="text-xs font-medium uppercase tracking-wider text-stone-600">Presents</span>
-              </span>
-            </div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
               <div className="lg:col-span-8">
                 <h1 className="text-7xl md:text-9xl lg:text-[10rem] leading-[0.85] font-normal text-stone-900 mb-4 mix-blend-multiply" style={customStyles.editorialFont}>
@@ -453,6 +467,7 @@
 
     const HomePage = () => (
       <div style={customStyles.body}>
+        <Navbar />
         <HeroSection />
         <AboutSection />
         <ScheduleSection />
