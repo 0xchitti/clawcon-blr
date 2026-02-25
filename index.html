@@ -373,8 +373,8 @@
 
     const SpeakerCard = ({ name, role }) => (
       <div className="flex flex-col items-center text-center gap-3">
-        <div className="w-20 h-20 rounded-full bg-stone-200 flex items-center justify-center text-stone-400">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-36 h-36 rounded-full bg-stone-200 flex items-center justify-center text-stone-400">
+          <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
         </div>
@@ -434,7 +434,7 @@
         { time: '8:00 PM', title: 'Builder Mixer', description: 'Open floor. No agenda. The real conversations happen here.' },
       ];
       return (
-        <section id="schedule" className="py-24 px-6 bg-[#faf7f2] border-t border-stone-200/60">
+        <section id="schedule" className="pt-12 pb-24 px-6 bg-[#faf7f2] border-t border-stone-200/60">
           <div className="max-w-[1000px] mx-auto">
             <div className="text-center mb-16">
               <span className="block text-orange-600 font-medium tracking-wide mb-2 uppercase text-sm">Program Schedule</span>
@@ -523,29 +523,18 @@
             </button>
             <p className="mt-8 text-sm text-stone-500 uppercase tracking-widest">March 08, 2026 · Bangalore, India · Invite-only + curated applications</p>
           </div>
+          <div className="mt-24 pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4 text-stone-500 text-sm">
+            <span className="font-bold text-stone-300 text-lg tracking-tighter" style={customStyles.editorialFont}>ClawCon '26</span>
+            <span>Presented by AI Weekends × Inner Circle · Bangalore, India</span>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-orange-400 transition-colors">Twitter</a>
+              <a href="#" className="hover:text-orange-400 transition-colors">LinkedIn</a>
+              <a href="#" className="hover:text-orange-400 transition-colors">Email</a>
+            </div>
+          </div>
         </section>
       );
     };
-
-    const Footer = () => (
-      <footer className="bg-[#faf7f2] border-t border-stone-200 py-12 px-6">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-stone-900 font-bold text-2xl tracking-tighter">ClawCon '26</div>
-          <div className="text-stone-500 text-sm md:text-base flex flex-col md:flex-row items-center gap-2 md:gap-6">
-            <span>Presented by Inner Circle</span>
-            <span className="hidden md:inline">·</span>
-            <span>March 08, 2026</span>
-            <span className="hidden md:inline">·</span>
-            <span>Bangalore, India</span>
-          </div>
-          <div className="flex gap-6">
-            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">Twitter</a>
-            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">LinkedIn</a>
-            <a href="#" className="text-stone-400 hover:text-orange-600 transition-colors">Email</a>
-          </div>
-        </div>
-      </footer>
-    );
 
     const HomePage = () => (
       <div style={customStyles.body}>
@@ -555,7 +544,6 @@
         <ScheduleSection />
         <SpeakersSection />
         <ApplySection />
-        <Footer />
       </div>
     );
 
