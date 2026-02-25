@@ -330,7 +330,7 @@
 
     const AboutSection = () => (
       <section id="about" className="py-24 px-6 bg-stone-100 text-center">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-auto mb-16">
           <span className="block text-orange-600 font-medium tracking-wide mb-4 uppercase text-sm">Hosted by Inner Circle</span>
           <h2 className="text-5xl md:text-6xl text-stone-900 leading-tight mb-8" style={customStyles.editorialFont}>
             Built by builders.<br />
@@ -342,6 +342,19 @@
           <p className="text-lg text-stone-600 leading-relaxed">
             Clawd Kitchen sent 30+ agents live with a $6K prize pool. ClawCon is the IRL version of that energy.
           </p>
+        </div>
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          {[
+            { title: 'Curated Attendance', desc: "We manually review every application. You'll be in a room with CTOs, lead maintainers of major open source projects, and founders." },
+            { title: 'Live Deployments', desc: 'Talk is cheap. Presenters are required to show live code or deployments. No pre-recorded videos allowed.' },
+            { title: 'Zero-BS Networking', desc: 'Structured networking sessions designed to help you find collaborators, not just exchange business cards.' },
+            { title: 'Agent Battle on Polymarket', desc: 'Agents compete on Polymarket prediction markets in real time. Live leaderboard projected for all 100 builders. Real money. Real stakes.' },
+          ].map((f, i) => (
+            <div key={i} className="bg-[#faf7f2] p-8 rounded-2xl text-left">
+              <h3 className="text-xl font-medium text-stone-900 mb-3" style={customStyles.editorialFont}>{f.title}</h3>
+              <p className="text-stone-600 leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
     );
@@ -364,8 +377,7 @@
       <section id="speakers" className="py-24 px-6 bg-[#faf7f2] text-center">
         <div className="max-w-4xl mx-auto">
           <span className="block text-orange-600 font-medium tracking-wide mb-2 uppercase text-sm">Line Up</span>
-          <h2 className="text-5xl md:text-6xl text-stone-900 mb-3" style={customStyles.editorialFont}>Speakers</h2>
-          <p className="text-stone-500 mb-16">Announcements coming soon. Stay tuned.</p>
+          <h2 className="text-5xl md:text-6xl text-stone-900 mb-16" style={customStyles.editorialFont}>Speakers</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
             <SpeakerCard name="TBA" role="Opening Keynote" />
             <SpeakerCard name="TBA" role="Fireside Chat I — AI × Crypto" />
@@ -414,8 +426,7 @@
           <div className="max-w-[1000px] mx-auto">
             <div className="text-center mb-16">
               <span className="block text-orange-600 font-medium tracking-wide mb-2 uppercase text-sm">Program Schedule</span>
-              <h2 className="text-5xl md:text-6xl text-stone-900 mb-3" style={customStyles.editorialFont}>The Evening</h2>
-              <p className="text-stone-500">March 08, 2026 · IST Timezone</p>
+              <h2 className="text-5xl md:text-6xl text-stone-900" style={customStyles.editorialFont}>The Evening</h2>
             </div>
             <div className="border-t border-stone-300">
               {items.map((item, i) => (
@@ -531,7 +542,6 @@
         <AboutSection />
         <SpeakersSection />
         <ScheduleSection />
-        <FeaturesSection />
         <PartnersSection />
         <ApplySection />
         <Footer />
