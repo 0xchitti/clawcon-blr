@@ -247,10 +247,10 @@
         <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:50}} className="w-full bg-[#faf7f2]/90 backdrop-blur-md border-b border-stone-200/60">
           <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between h-14">
             <span className="text-stone-900 font-bold text-lg tracking-tighter" style={customStyles.editorialFont}>ClawCon '26</span>
-            <div className="flex items-center gap-8">
-              <button onClick={() => scrollTo('about')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">About</button>
-              <button onClick={() => scrollTo('speakers')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">Speakers</button>
-              <button onClick={() => scrollTo('schedule')} className="text-sm text-stone-500 hover:text-stone-900 transition-colors">Schedule</button>
+            <div className="flex items-center gap-6">
+              <button onClick={() => scrollTo('about')} className="hidden md:block text-sm text-stone-500 hover:text-stone-900 transition-colors">About</button>
+              <button onClick={() => scrollTo('speakers')} className="hidden md:block text-sm text-stone-500 hover:text-stone-900 transition-colors">Speakers</button>
+              <button onClick={() => scrollTo('schedule')} className="hidden md:block text-sm text-stone-500 hover:text-stone-900 transition-colors">Schedule</button>
               <button onClick={() => scrollTo('apply')} className="text-sm bg-orange-600 hover:bg-orange-700 text-white px-4 py-1.5 rounded-full transition-colors">Apply</button>
             </div>
           </div>
