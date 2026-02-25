@@ -279,8 +279,8 @@
           </h1>
           <div className="flex items-center justify-center gap-3 mb-8 flex-wrap">
             <span className="text-stone-400 text-base">📍</span>
-            <img src="/machete-logo.svg" style={{height:'16px',width:'auto',opacity:0.45}} alt="Machete" />
-            <span className="text-lg md:text-xl italic text-stone-500" style={customStyles.editorialFont}>Office · Bangalore · March 08, 2026</span>
+            <img src="/machete-logo.svg" style={{height:'22px',width:'auto',opacity:0.45}} alt="Machete" />
+            <span className="text-lg md:text-xl italic text-stone-500" style={customStyles.editorialFont}>Bangalore · March 08, 2026</span>
           </div>
           <div className="flex justify-center mb-16">
             <a href="#apply" onClick={(e) => { e.preventDefault(); const el = document.getElementById('apply'); if(el){ const top = el.getBoundingClientRect().top + window.scrollY - 56; window.scrollTo({top, behavior:'smooth'}); }}} className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-8 py-3.5 rounded-full text-base font-medium transition-colors duration-300 shadow-lg shadow-orange-900/20 group">
@@ -293,16 +293,16 @@
           <div className="w-full overflow-hidden" style={{maskImage:'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', WebkitMaskImage:'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'}}>
             <div className="marquee-track flex gap-20 items-center whitespace-nowrap" style={{animation:'marquee 28s linear infinite'}}>
               {[
-                { src:'https://growthx.club/_next_public/logo/growthx-dark-mode.svg', name:'GrowthX', h:'22px' },
+                { src:'https://growthx.club/_next_public/logo/growthx-dark-mode.svg', name:'GrowthX', h:'22px', invert:true },
                 { src:'/machete-logo.svg', name:'Machete', h:'18px' },
                 { src:'https://raw.githubusercontent.com/base/brand-kit/main/logo/Basemark/Digital/Base_basemark_blue.svg', name:'Base', h:'32px' },
                 { src:'https://assets.emergent.sh/assets/emergent-logo-new.svg', name:'Emergent', h:'22px' },
-                { src:'https://growthx.club/_next_public/logo/growthx-dark-mode.svg', name:'GrowthX', h:'22px' },
+                { src:'https://growthx.club/_next_public/logo/growthx-dark-mode.svg', name:'GrowthX', h:'22px', invert:true },
                 { src:'/machete-logo.svg', name:'Machete', h:'18px' },
                 { src:'https://raw.githubusercontent.com/base/brand-kit/main/logo/Basemark/Digital/Base_basemark_blue.svg', name:'Base', h:'32px' },
                 { src:'https://assets.emergent.sh/assets/emergent-logo-new.svg', name:'Emergent', h:'22px' },
               ].map((p, i) => (
-                <img key={i} src={p.src} alt={p.name} className="partner-logo flex-shrink-0" style={{height:p.h, width:'auto'}} />
+                <img key={i} src={p.src} alt={p.name} className={`${p.invert ? 'partner-logo-invert' : 'partner-logo'} flex-shrink-0`} style={{height:p.h, width:'auto'}} />
               ))}
             </div>
           </div>
@@ -578,6 +578,8 @@
           @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
           .partner-logo { filter: grayscale(100%); opacity: 0.5; transition: filter 0.3s ease, opacity 0.3s ease; }
           .partner-logo:hover { filter: grayscale(0%); opacity: 1; }
+          .partner-logo-invert { filter: invert(1) grayscale(100%); opacity: 0.5; transition: filter 0.3s ease, opacity 0.3s ease; }
+          .partner-logo-invert:hover { filter: invert(1); opacity: 1; }
           .marquee-track:hover { animation-play-state: paused; }
         `;
         document.head.appendChild(style);
