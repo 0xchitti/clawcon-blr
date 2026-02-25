@@ -237,10 +237,14 @@
     const Navbar = () => {
       const scrollTo = (id) => {
         const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) {
+          const offset = 56;
+          const top = el.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
       };
       return (
-        <nav style={{position:'sticky',top:0,zIndex:50}} className="w-full bg-[#faf7f2]/90 backdrop-blur-md border-b border-stone-200/60">
+        <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:50}} className="w-full bg-[#faf7f2]/90 backdrop-blur-md border-b border-stone-200/60">
           <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between h-14">
             <span className="text-stone-900 font-bold text-lg tracking-tighter" style={customStyles.editorialFont}>ClawCon '26</span>
             <div className="flex items-center gap-8">
