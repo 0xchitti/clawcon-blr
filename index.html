@@ -206,16 +206,16 @@
           antR.rotation.x = 1.2;
           antR.rotation.z = 0.3;
           lobsterGroup.add(antR);
-          lobsterGroup.rotation.x = -Math.PI / 8;
-          lobsterGroup.rotation.y = -Math.PI / 5;
+          lobsterGroup.rotation.x = -Math.PI / 6;
+          lobsterGroup.rotation.y = Math.PI;
           lobsterGroup.position.y = 0;
           scene.add(lobsterGroup);
-          camera.position.z = 18;
-          camera.position.y = 1;
+          camera.position.z = 14;
+          camera.position.y = 2;
           camera.lookAt(0, 0, 0);
           let time = 0;
           let animFrameId;
-          const baseRotY = -Math.PI / 5;
+          const baseRotY = Math.PI;
           const animate = () => {
             animFrameId = requestAnimationFrame(animate);
             time += 0.008;
@@ -282,7 +282,7 @@
     const HeroSection = () => (
       <div>
         {/* 3D canvas — pure visual, no text overlay */}
-        <div className="relative w-full overflow-hidden" style={{height:'50vh'}}>
+        <div className="relative w-full overflow-hidden" style={{height:'55vh'}}>
           <ThreeCanvas />
           <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#faf7f2] to-transparent pointer-events-none" style={{zIndex:1}} />
         </div>
