@@ -208,11 +208,11 @@
           lobsterGroup.add(antR);
           lobsterGroup.rotation.x = -Math.PI / 6;
           lobsterGroup.rotation.y = Math.PI;
-          lobsterGroup.position.y = 0;
+          lobsterGroup.position.y = 3;
           scene.add(lobsterGroup);
           camera.position.z = 14;
           camera.position.y = 4;
-          camera.lookAt(0, 0, 0);
+          camera.lookAt(0, 3, 0);
           let time = 0;
           let animFrameId;
           const baseRotY = Math.PI;
@@ -222,7 +222,7 @@
             // Steady turntable rotation
             lobsterGroup.rotation.y = baseRotY + time * 0.15;
             // Gentle breathing float
-            lobsterGroup.position.y = Math.sin(time * 0.8) * 0.15;
+            lobsterGroup.position.y = 3 + Math.sin(time * 0.8) * 0.15;
             // Subtle antenna sway
             antL.rotation.z = -0.3 + Math.sin(time * 1.5) * 0.08;
             antR.rotation.z = 0.3 + Math.cos(time * 1.5) * 0.08;
@@ -282,7 +282,7 @@
     const HeroSection = () => (
       <div>
         {/* 3D canvas — pure visual, no text overlay */}
-        <div className="relative w-full overflow-hidden" style={{height:'55vh'}}>
+        <div className="relative w-full overflow-hidden" style={{height:'45vh'}}>
           <ThreeCanvas />
           <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#faf7f2] to-transparent pointer-events-none" style={{zIndex:1}} />
         </div>
