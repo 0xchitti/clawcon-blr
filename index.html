@@ -74,8 +74,9 @@
           fillLight.position.set(-5, 0, 5);
           scene.add(fillLight);
           const lobsterGroup = new THREE.Group();
-          const shellMaterial = new THREE.MeshPhysicalMaterial({ color: 0xff6b6b, roughness: 0.2, metalness: 0.1, clearcoat: 0.3, clearcoatRoughness: 0.2 });
-          const darkMaterial = new THREE.MeshStandardMaterial({ color: 0x8b0000, roughness: 0.5 });
+          const shellMaterial = new THREE.MeshPhysicalMaterial({ color: 0xe84030, roughness: 0.15, metalness: 0.15, clearcoat: 0.5, clearcoatRoughness: 0.1 });
+          const darkMaterial = new THREE.MeshStandardMaterial({ color: 0x7a1a1a, roughness: 0.4, metalness: 0.1 });
+          const underMaterial = new THREE.MeshPhysicalMaterial({ color: 0xff8866, roughness: 0.3, metalness: 0.05 });
           const bodyGeo = new THREE.CylinderGeometry(0.8, 1.2, 3.5, 32);
           const body = new THREE.Mesh(bodyGeo, shellMaterial);
           body.rotation.x = Math.PI / 2;
@@ -164,14 +165,36 @@
             legL.rotation.x = 0.5;
             lobsterGroup.add(legL);
           }
+          // Eye stalks
+          const stalkGeo = new THREE.CylinderGeometry(0.06, 0.08, 0.8, 8);
+          const stalkL = new THREE.Mesh(stalkGeo, shellMaterial);
+          stalkL.position.set(-0.35, 0.9, 3.0);
+          stalkL.rotation.x = -0.3;
+          stalkL.rotation.z = -0.15;
+          lobsterGroup.add(stalkL);
+          const stalkR = new THREE.Mesh(stalkGeo, shellMaterial);
+          stalkR.position.set(0.35, 0.9, 3.0);
+          stalkR.rotation.x = -0.3;
+          stalkR.rotation.z = 0.15;
+          lobsterGroup.add(stalkR);
           const eyeGeo = new THREE.SphereGeometry(0.15, 16, 16);
-          const eyeMat = new THREE.MeshStandardMaterial({ color: 0x000000, roughness: 0 });
+          const eyeMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.1, metalness: 0.3 });
+          const eyeWhiteGeo = new THREE.SphereGeometry(0.12, 16, 16);
+          const eyeWhiteMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3 });
           const eyeL = new THREE.Mesh(eyeGeo, eyeMat);
-          eyeL.position.set(-0.4, 0.8, 3.2);
+          eyeL.position.set(-0.4, 1.2, 3.3);
           lobsterGroup.add(eyeL);
+          const eyeWhiteL = new THREE.Mesh(eyeWhiteGeo, eyeWhiteMat);
+          eyeWhiteL.position.set(-0.38, 1.25, 3.4);
+          eyeWhiteL.scale.set(0.4, 0.4, 0.4);
+          lobsterGroup.add(eyeWhiteL);
           const eyeR = new THREE.Mesh(eyeGeo, eyeMat);
-          eyeR.position.set(0.4, 0.8, 3.2);
+          eyeR.position.set(0.4, 1.2, 3.3);
           lobsterGroup.add(eyeR);
+          const eyeWhiteR = new THREE.Mesh(eyeWhiteGeo, eyeWhiteMat);
+          eyeWhiteR.position.set(0.38, 1.25, 3.4);
+          eyeWhiteR.scale.set(0.4, 0.4, 0.4);
+          lobsterGroup.add(eyeWhiteR);
           const antGeo = new THREE.CylinderGeometry(0.02, 0.05, 8, 8);
           const antL = new THREE.Mesh(antGeo, shellMaterial);
           antL.position.set(-0.5, 1, 5);
@@ -183,21 +206,29 @@
           antR.rotation.x = 1.2;
           antR.rotation.z = 0.3;
           lobsterGroup.add(antR);
-          lobsterGroup.rotation.x = -Math.PI / 6;
-          lobsterGroup.rotation.y = -Math.PI / 4;
+          lobsterGroup.rotation.x = -Math.PI / 8;
+          lobsterGroup.rotation.y = -Math.PI / 5;
           lobsterGroup.position.y = 0;
           scene.add(lobsterGroup);
-          camera.position.z = 14;
-          camera.position.y = 2;
+          camera.position.z = 13;
+          camera.position.y = 1.5;
+          camera.lookAt(0, 0, 0);
           let time = 0;
           let animFrameId;
+          const baseRotY = -Math.PI / 5;
           const animate = () => {
             animFrameId = requestAnimationFrame(animate);
-            time += 0.005;
-            lobsterGroup.rotation.y = Math.sin(time) * 0.2 + time * 0.2;
-            lobsterGroup.position.y = Math.sin(time * 2) * 0.2;
-            antL.rotation.z = -0.3 + Math.sin(time * 3) * 0.05;
-            antR.rotation.z = 0.3 + Math.cos(time * 3) * 0.05;
+            time += 0.008;
+            // Steady turntable rotation
+            lobsterGroup.rotation.y = baseRotY + time * 0.15;
+            // Gentle breathing float
+            lobsterGroup.position.y = Math.sin(time * 0.8) * 0.15;
+            // Subtle antenna sway
+            antL.rotation.z = -0.3 + Math.sin(time * 1.5) * 0.08;
+            antR.rotation.z = 0.3 + Math.cos(time * 1.5) * 0.08;
+            // Gentle claw bob
+            leftClaw.position.y = Math.sin(time * 1.2) * 0.05;
+            rightClaw.position.y = Math.sin(time * 1.2 + 1) * 0.05;
             renderer.render(scene, camera);
           };
           animate();
@@ -206,20 +237,10 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
           };
-          const handleMouseMove = (e) => {
-            const x = (e.clientX / window.innerWidth) * 2 - 1;
-            const y = -(e.clientY / window.innerHeight) * 2 + 1;
-            lobsterGroup.rotation.z = x * 0.05;
-            camera.position.x = x * 0.5;
-            camera.position.y = 2 + y * 0.5;
-            camera.lookAt(0, 0, 0);
-          };
           window.addEventListener('resize', handleResize);
-          document.addEventListener('mousemove', handleMouseMove);
           return () => {
             cancelAnimationFrame(animFrameId);
             window.removeEventListener('resize', handleResize);
-            document.removeEventListener('mousemove', handleMouseMove);
             if (container && renderer.domElement && container.contains(renderer.domElement)) {
               container.removeChild(renderer.domElement);
             }
